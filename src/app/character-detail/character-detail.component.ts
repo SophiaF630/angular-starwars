@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Character } from '../character';
+//import { Character } from '../character';
 import { CharacterService } from '../character.service';
+import { Character, StarwarsService } from '../starwars.service';
 
 @Component({
   selector: 'app-character-detail',
@@ -19,19 +20,19 @@ export class CharacterDetailComponent implements OnInit {
   
   constructor(
     private route: ActivatedRoute,
-    private characterService: CharacterService,
+    private router: Router,
+    private starwarsService: StarwarsService,
     private location: Location
   ) { }
 
-  ngOnInit(): void {
-    this.getCharacter();
+  ngOnInit() {
+    this.starwarsService.getCharacterDetails(this.route.snapshot.params.id)
+      .then(result => {
+        this.character = result;
+        console.info('character: ', result)
+      })
   }
 
-  getCharacter(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.characterService.getCharacter(id)
-      .subscribe(character => this.character = character);
-  }
  
   goBack(): void {
     this.location.back();
