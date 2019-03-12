@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 //import { Character } from '../character';
 import { CharacterService } from '../character.service';
-import { Character, StarwarsService } from '../starwars.service';
+import { CharacterDetail, StarwarsService } from '../starwars.service';
 
 @Component({
   selector: 'app-character-detail',
@@ -16,7 +16,7 @@ import { Character, StarwarsService } from '../starwars.service';
 
 export class CharacterDetailComponent implements OnInit {
 
-  character: Character;
+  characterDetail: CharacterDetail;
   
   constructor(
     private route: ActivatedRoute,
@@ -26,10 +26,11 @@ export class CharacterDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.starwarsService.getCharacterDetails(this.route.snapshot.params.id)
       .then(result => {
-        this.character = result;
-        console.info('character: ', result)
+        this.characterDetail = result;
+        console.info('characterDetail: ', result)
       })
   }
 

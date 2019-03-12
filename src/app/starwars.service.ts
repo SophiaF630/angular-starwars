@@ -3,31 +3,36 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, flatMap, toArray } from 'rxjs/operators';
 
 export interface Character {
-    id: number;
+    url: string;
     name: string;
+    id: number;
+    
 }
 
 export interface CharacterDetail {
-    id: number;
-    name: string;
+    url: string;
+    name: string;  
+    birth_year: string;
+    eye_color: string;
+    
 }
 
 @Injectable()
 export class StarwarsService {
-    constructor(private http: HttpClient,
-        @Inject('appKey') private appKey) { }
+    // constructor(private http: HttpClient,
+    //     @Inject('appKey') private appKey) { }
+    constructor(
+        private http: HttpClient) { }
 
     getCharacterList(): Promise<Character[]> {
-        const params = new HttpParams()
-            .set('limit', 20 + '')
-            .set('apikey', this.appKey);
         return (
-            this.http.get<Character[]>('https://swapi.co/api/people', { params })
+            this.http.get<Character[]>('https://swapi.co/api/people')
                 .pipe(
-                    map(v => v['data']['results']),
+                    map(v => v['results']),
                     flatMap(v => v),
                     map((v: any) => {
-                        return (<Character>{ id: v.id, name: v.name });
+                        var urlarray = v.url.split('/');
+                        return (<Character>{ url: v.url, name: v.name, id: urlarray[urlarray.length-1] });
                     }),
                     toArray()
                 )
@@ -35,16 +40,16 @@ export class StarwarsService {
         )
     }
     getCharacterDetails(id: number): Promise<CharacterDetail> {
-        const params = new HttpParams()
-            .set('apikey', this.appKey);
         return (
-            this.http.get<CharacterDetail>(`https://swapi.co/api/people/${id}`, { params })
+            this.http.get<CharacterDetail>(`https://swapi.co/api/people/${id}`)
                 .pipe(
-                    map(v => v['data']['results'][0]),
+                    map(v => v['results'][0]),
                     map((v: any) => {
                         return (<CharacterDetail>{
-                            id: v.id,
-                            name: v.name
+                            name: v.name,
+                            birth_year: v.birth_year,
+                            eye_color: v.eye_color,
+                            url: v.url,
                         })
                     })
                 )
@@ -52,3 +57,6 @@ export class StarwarsService {
         );
     }
 }
+
+
+//`https://swapi.co/api/people/${id}`

@@ -11,7 +11,7 @@ import { CharactersComponent } from './characters/characters.component';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 import { StarwarsService } from './starwars.service';
 
-import { AppRoutingModule }     from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 const ROUTES: Route[] = [
   { path: 'home', component: HomeComponent}
@@ -31,7 +31,7 @@ const ROUTES: Route[] = [
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [StarwarsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
