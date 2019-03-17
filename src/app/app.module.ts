@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-
+import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CharactersComponent } from './characters/characters.component';
@@ -29,7 +29,8 @@ const ROUTES: Route[] = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule,
   ],
   providers: [StarwarsService],
   bootstrap: [AppComponent]

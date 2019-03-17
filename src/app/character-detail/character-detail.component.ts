@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 //import { Character } from '../character';
 import { CharacterService } from '../character.service';
 import { CharacterDetail, StarwarsService } from '../starwars.service';
+import { Character } from '../character';
 
 @Component({
   selector: 'app-character-detail',
@@ -17,7 +18,8 @@ import { CharacterDetail, StarwarsService } from '../starwars.service';
 export class CharacterDetailComponent implements OnInit {
 
   characterDetail: CharacterDetail;
-  
+  //@Input() character: Character;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,8 +28,9 @@ export class CharacterDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-    this.starwarsService.getCharacterDetails(this.route.snapshot.params.id)
+    //var name = this.route.snapshot.params.name;
+    //var url = this.starwarsService.getCharacterList.findbyName(name).url;
+    this.starwarsService.getCharacterDetails(this.route.snapshot.params.name)
       .then(result => {
         this.characterDetail = result;
         console.info('characterDetail: ', result)
@@ -36,6 +39,11 @@ export class CharacterDetailComponent implements OnInit {
 
  
   goBack(): void {
+    this.location.back();
+  }
+
+  back() {
+    //this.router.navigate(['/']);
     this.location.back();
   }
 

@@ -14,10 +14,13 @@ import { Character, StarwarsService } from '../starwars.service';
 export class CharactersComponent implements OnInit {
 
   characters: Character[] = []
+  selectedCharacter: Character;
 
   constructor(
     private starwarsService: StarwarsService,
     private location: Location) { }
+
+
 
   ngOnInit() {
     this.starwarsService.getCharacterList()
@@ -30,6 +33,9 @@ export class CharactersComponent implements OnInit {
     });
   }
 
+  onSelect(character: Character): void {
+    this.selectedCharacter = character;
+  }
   // getCharacters(): void {
   //   this.characterService.getCharacters()
   //     .subscribe(characters => this.characters = characters);

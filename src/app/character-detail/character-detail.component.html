@@ -1,12 +1,41 @@
-<div *ngIf="character">
+<div *ngIf="characterDetail">
 
-  <h2>{{character.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{character.id}}</div>
+  <!-- <h2>{{characterDetail?.name | uppercase}} Details</h2>
   <div>
     <label>name:
-      <input [(ngModel)]="character.name" placeholder="name" />
+      <input [(ngModel)]="characterDetail.name" placeholder="name" />
     </label>
-  </div>
-  <button (click)="goBack()">go back</button>
+  </div> -->
+
+  <mat-card (swiperight)="back()">
+    <mat-card-header>
+      <mat-card-title>{{ characterDetail?.name }}</mat-card-title>
+    </mat-card-header>
+    <!-- <img mat-card-image [src]="character?.image"> -->
+    <mat-card-content>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Species: {{ characterDetail?.species }}</p>
+      <p>Gender: {{ characterDetail?.gender }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="end">
+      <button type="button" mat-button mat-raised-button color="primary"
+          (click)="back()">
+        <!-- <mat-icon>arrow_back</mat-icon> -->
+        Back
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
 </div>
+
