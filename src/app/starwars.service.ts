@@ -6,12 +6,8 @@ import { Router, UrlTree, UrlSegment, UrlSegmentGroup, PRIMARY_OUTLET, DefaultUr
 export interface Character {
     url: string;
     name: string;
-    id: number;
 
 }
-
-
-export let Characters: Character[] = []
 
 export interface CharacterDetail {
     url: string;
@@ -37,15 +33,14 @@ export class StarwarsService {
         private http: HttpClient,
         private router: Router) { }
 
-    getCharacterList(): Promise<Character[]> {
+    getCharacterList(page: number): Promise<Character[]> {
         return (
-            this.http.get<Character[]>('https://swapi.co/api/people')
+            this.http.get<Character[]>(`https://swapi.co/api/people/?page=${page}`)
                 .pipe(
                     map(v => v['results']),
                     flatMap(v => v),
-                    map((v: any) => {
-                        var urlarray = v.url.split('/');
-                        return (<Character>{ url: v.url, name: v.name, id: urlarray[urlarray.length - 1] });
+                    map((v: any) => {                       
+                        return (<Character>{ url: v.url, name: v.name });
                     }),
                     toArray()
                 )

@@ -20,7 +20,6 @@ export class CharacterDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private starwarsService: StarwarsService,
     private location: Location
   ) { }

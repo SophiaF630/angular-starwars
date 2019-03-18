@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'characterdetail/:name', component: CharacterDetailComponent },
-  { path: 'characters', component: CharactersComponent }
+  { path: 'characters/page/:page', component: CharactersComponent }
 
 ];
 
@@ -22,3 +22,4 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
+

@@ -12,17 +12,19 @@ import { Character, StarwarsService } from '../starwars.service';
 })
 export class CharactersComponent implements OnInit {
 
-  characters: Character[] = []
-  selectedCharacter: Character;
+  characters: Character[] = [];
+  //selectedCharacter: Character;
+  //page: number;
 
   constructor(
     private starwarsService: StarwarsService,
-    private location: Location) { }
+    private location: Location,
+    private route: ActivatedRoute) { }
 
 
 
   ngOnInit() {
-    this.starwarsService.getCharacterList()
+    this.starwarsService.getCharacterList(this.route.snapshot.params.page)
     .then(result => {
       console.log('result:', result);
       this.characters = result}
@@ -30,11 +32,24 @@ export class CharactersComponent implements OnInit {
     .catch(error => {
       console.error('error: ', error);
     });
+
+    // this.route.queryParams.subscribe(params => {
+    //   console.log(params);
+    //   this.page = params['page'];
+    // });
+    // this.starwarsService.getCharacterList(this.page)
+    // .then(result => {
+    //   console.log('result:', result);
+    //   this.characters = result}
+    //   )
+    // .catch(error => {
+    //   console.error('error: ', error);
+    // });
   }
 
-  onSelect(character: Character): void {
-    this.selectedCharacter = character;
-  }
+  // onSelect(character: Character): void {
+  //   this.selectedCharacter = character;
+  // }
   // getCharacters(): void {
   //   this.characterService.getCharacters()
   //     .subscribe(characters => this.characters = characters);
