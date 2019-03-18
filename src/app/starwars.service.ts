@@ -1,6 +1,7 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, flatMap, toArray } from 'rxjs/operators';
+import { Router, UrlTree, UrlSegment, UrlSegmentGroup, PRIMARY_OUTLET, DefaultUrlSerializer, RouterState, ActivatedRoute } from '@angular/router';
 
 export interface Character {
     url: string;
@@ -24,8 +25,17 @@ export interface CharacterDetail {
 export class StarwarsService {
     // constructor(private http: HttpClient,
     //     @Inject('appKey') private appKey) { }
+    tree: UrlTree;
+    fragment = '';
+    queryParams = {};
+    // primary outlet
+    primary: UrlSegmentGroup;
+    // secondary outlet
+    sidebar: UrlSegmentGroup;
+
     constructor(
-        private http: HttpClient) { }
+        private http: HttpClient,
+        private router: Router) { }
 
     getCharacterList(): Promise<Character[]> {
         return (
@@ -44,30 +54,16 @@ export class StarwarsService {
     }
 
 
-    // getCharacterUrl(name: string):Promise<String>
-    // {
-    //     //return this.Characters.filter(x => x.name == name).url;
-    //     return (
-    //         this.http.get<Character[]>('https://swapi.co/api/people')
-    //             .pipe(
-    //                 map(v => v['results'].filter((x: { name: string; })=>x.name == name)),
-    //                 flatMap(v => v),
-    //                 map((v: any) => {
-
-    //                     return (<String>{ url: v.url);
-    //                 }),
-    //                 toString()
-    //             )
-    //             .toPromise()
-    //     )
-    // }
-
     getCharacterDetails(name: string): Promise<CharacterDetail> {
         return (
             this.http.get<CharacterDetail>(`https://swapi.co/api/people/?search=${name}`)
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
+                        var paras  = v.url.split('/');
+                        //paras = paras.reverse();
+                        var id = paras[5];
+                        var imageurl = '/assets/img/characters/' + id + '.jpg';
                         return (<CharacterDetail>{
                             name: v.name,
                             birth_year: v.birth_year,
@@ -83,6 +79,7 @@ export class StarwarsService {
                             starships: v.starships,
                             vehicles: v.vehicles,
                             url: v.url,
+                            image: imageurl,
                         })
                     })
                 )

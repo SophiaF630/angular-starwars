@@ -1,36 +1,32 @@
 <div *ngIf="characterDetail">
 
-  <!-- <h2>{{characterDetail?.name | uppercase}} Details</h2>
-  <div>
-    <label>name:
-      <input [(ngModel)]="characterDetail.name" placeholder="name" />
-    </label>
-  </div> -->
-
   <mat-card (swiperight)="back()">
-    <mat-card-header>
-      <mat-card-title>{{ characterDetail?.name }}</mat-card-title>
-    </mat-card-header>
-    <!-- <img mat-card-image [src]="character?.image"> -->
-    <mat-card-content>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Species: {{ characterDetail?.species }}</p>
-      <p>Gender: {{ characterDetail?.gender }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-      <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ characterDetail?.name }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="characterDetail?.image">
+    </mat-card>
+    <mat-card>
 
-    </mat-card-content>
+      <mat-card-content>
+        <p>Birth Year: {{ characterDetail?.birth_year }}</p>
+        <p>Species: {{ characterDetail?.species }}</p>
+        <p>Gender: {{ characterDetail?.gender }}</p>
+        <p>Height: {{ characterDetail?.height }}</p>
+        <p>Mass: {{ characterDetail?.mass }}</p>
+        <p>Hair Color: {{ characterDetail?.hair_color }}</p>
+        <p>Skin Color: {{ characterDetail?.skin_color }}</p>
+        <p>Eye Color: {{ characterDetail?.eye_color }}</p>
+        <p>Homeworld: {{ characterDetail?.homeworld }}</p>
+        <p>Films: {{ characterDetail?.films }}</p>
+        <p>Starships: {{ characterDetail?.starships }}</p>
+        <p>Vehicles: {{ characterDetail?.vehicles }}</p>
+      </mat-card-content>
+    </mat-card>
+
     <mat-card-actions fxLayoutAlign="end">
-      <button type="button" mat-button mat-raised-button color="primary"
-          (click)="back()">
+      <button type="button" mat-button mat-raised-button color="primary" (click)="back()">
         <!-- <mat-icon>arrow_back</mat-icon> -->
         Back
       </button>
@@ -38,4 +34,3 @@
   </mat-card>
 
 </div>
-

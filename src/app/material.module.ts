@@ -6,12 +6,14 @@ import { MatListModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material';
 
 const MODULES = [
     FlexLayoutModule,
     MatToolbarModule, MatListModule,
     MatButtonModule, MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
 ]
 
 @NgModule({

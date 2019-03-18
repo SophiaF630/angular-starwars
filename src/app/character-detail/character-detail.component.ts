@@ -2,10 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-//import { Character } from '../character';
-import { CharacterService } from '../character.service';
 import { CharacterDetail, StarwarsService } from '../starwars.service';
-import { Character } from '../character';
+
 
 @Component({
   selector: 'app-character-detail',

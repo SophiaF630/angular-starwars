@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-// import { Character } from '../character';
-import { CharacterService } from '../character.service';
+
 import { Character, StarwarsService } from '../starwars.service';
 
 @Component({
