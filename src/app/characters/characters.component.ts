@@ -26,6 +26,7 @@ export class CharactersComponent implements OnInit {
 
   ngOnInit() {
     this.page = this.route.snapshot.params.page;
+    //this.page = 1;
     this.starwarsService.getCharacterList(this.page)
       .then(result => {
         console.log('result:', result);
@@ -43,7 +44,7 @@ export class CharactersComponent implements OnInit {
 
   previous(): void {
     if (this.page > 1) {
-      this.page -= 1;
+      this.page = this.page*1 - 1;
     }
 
     //ngOnInit();
@@ -60,7 +61,8 @@ export class CharactersComponent implements OnInit {
   }
 
   next(): void {
-    this.page += 1;
+    
+    this.page = this.page*1 + 1;
     this.starwarsService.getCharacterList(this.page)
       .then(result => {
         console.log('result:', result);
@@ -73,5 +75,6 @@ export class CharactersComponent implements OnInit {
     this.router.navigateByUrl(`/characters/page/${this.page}`);
   }
 
+  
 }
 
