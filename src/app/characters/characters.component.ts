@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 
@@ -14,49 +14,63 @@ export class CharactersComponent implements OnInit {
 
   characters: Character[] = [];
   //selectedCharacter: Character;
-  //page: number;
+  page: number;
 
   constructor(
     private starwarsService: StarwarsService,
     private location: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
 
 
   ngOnInit() {
-    this.starwarsService.getCharacterList(this.route.snapshot.params.page)
-    .then(result => {
-      console.log('result:', result);
-      this.characters = result}
+    this.page = this.route.snapshot.params.page;
+    this.starwarsService.getCharacterList(this.page)
+      .then(result => {
+        console.log('result:', result);
+        this.characters = result
+      }
       )
-    .catch(error => {
-      console.error('error: ', error);
-    });
-
-    // this.route.queryParams.subscribe(params => {
-    //   console.log(params);
-    //   this.page = params['page'];
-    // });
-    // this.starwarsService.getCharacterList(this.page)
-    // .then(result => {
-    //   console.log('result:', result);
-    //   this.characters = result}
-    //   )
-    // .catch(error => {
-    //   console.error('error: ', error);
-    // });
+      .catch(error => {
+        console.error('error: ', error);
+      });
   }
-
-  // onSelect(character: Character): void {
-  //   this.selectedCharacter = character;
-  // }
-  // getCharacters(): void {
-  //   this.characterService.getCharacters()
-  //     .subscribe(characters => this.characters = characters);
-  // }
 
   goBack(): void {
     this.location.back();
+  }
+
+  previous(): void {
+    if (this.page > 1) {
+      this.page -= 1;
+    }
+
+    //ngOnInit();
+    this.starwarsService.getCharacterList(this.page)
+      .then(result => {
+        console.log('result:', result);
+        this.characters = result
+      })
+      .catch(error => {
+        console.error('error: ', error);
+      })
+
+    this.router.navigateByUrl(`/characters/page/${this.page}`);     
+  }
+
+  next(): void {
+    this.page += 1;
+    this.starwarsService.getCharacterList(this.page)
+      .then(result => {
+        console.log('result:', result);
+        this.characters = result
+      })
+      .catch(error => {
+        console.error('error: ', error);
+      })
+      
+    this.router.navigateByUrl(`/characters/page/${this.page}`);
   }
 
 }

@@ -1,14 +1,17 @@
 <h2>Characters</h2>
 <main class="characters">
     <mat-card-actions  fxLayout="row" fxLayoutAlign="space-around center" >
-        <button mat-raised-button color="primary"
-        a routerLink="/home" (click)="back()">
-          <!-- <mat-icon>arrow_back</mat-icon> -->
-          Previous
-        </button>
-        <button mat-raised-button color="primary"
-        a routerLink="/home" (click)="back()">
-          <!-- <mat-icon>arrow_back</mat-icon> -->
+      <div *ngIf="page==1" >
+          <button mat-raised-button color="primary" (click)="previous()" disabled>
+              Previous
+            </button>
+      </div>
+      <div *ngIf="page>1" >
+          <button mat-raised-button color="primary" (click)="previous()">
+              Previous
+            </button>
+      </div>
+        <button mat-raised-button color="primary" (click)="next()">
           Next
         </button>
     </mat-card-actions >
