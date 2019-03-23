@@ -7,13 +7,15 @@ import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
+import {MatDividerModule} from '@angular/material/divider';
 
 const MODULES = [
     FlexLayoutModule,
     MatToolbarModule, MatListModule,
     MatButtonModule, MatIconModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDividerModule
 ]
 
 @NgModule({

@@ -1,14 +1,10 @@
-<div *ngIf="characterDetail">
+<main *ngIf="characterDetail">
 
   <mat-card (swiperight)="back()">
-    <mat-card>
       <mat-card-header>
         <mat-card-title>{{ characterDetail?.name }}</mat-card-title>
       </mat-card-header>
       <img mat-card-image [src]="characterDetail?.image">
-    </mat-card>
-    <mat-card>
-
       <mat-card-content>
         <p>Birth Year: {{ characterDetail?.birth_year }}</p>
         <p>Species: {{ characterDetail?.species }}</p>
@@ -26,11 +22,10 @@
     </mat-card>
 
     <mat-card-actions fxLayoutAlign="end">
-      <button type="button" mat-button mat-raised-button color="primary" (click)="back()">
+      <button mat-raised-button (click)="back()">
         <!-- <mat-icon>arrow_back</mat-icon> -->
         Back
       </button>
     </mat-card-actions>
-  </mat-card>
 
-</div>
+</main>

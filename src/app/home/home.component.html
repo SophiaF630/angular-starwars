@@ -1,9 +1,14 @@
-<div style="text-align:center">
-  <nav>
-    <a routerLink="/characters/page/1">Characters</a>
-    <!-- <a [routerLink]="['characters']" [queryParams]="{page: 1}">Characters</a> -->
+<main style="text-align:center">
+  <mat-card class="cardPardding">
+    <mat-card-title>
+      <a routerLink="/characters/page/1">Characters</a>
+    </mat-card-title>
+  </mat-card>
+  <mat-card class="cardPardding">
+      <mat-card-title>
     <a routerLink="/films">Films</a>
-  </nav>
-</div>
+    </mat-card-title>
+  </mat-card>
+</main>
 
 <router-outlet></router-outlet>

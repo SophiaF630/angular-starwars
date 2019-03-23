@@ -12,6 +12,8 @@ import { CharacterDetailComponent } from './character-detail/character-detail.co
 import { StarwarsService } from './starwars.service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const ROUTES: Route[] = [
   { path: 'home', component: HomeComponent}
@@ -31,6 +33,7 @@ const ROUTES: Route[] = [
     HttpClientModule,
     AppRoutingModule,
     MaterialModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [StarwarsService],
   bootstrap: [AppComponent]
