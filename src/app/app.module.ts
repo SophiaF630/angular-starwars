@@ -14,6 +14,16 @@ import { StarwarsService } from './starwars.service';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FilmsComponent } from './films/films.component';
+import { FilmDetailComponent } from './film-detail/film-detail.component';
+import { StarshipDetailComponent } from './starship-detail/starship-detail.component';
+import { StarshipsComponent } from './starships/starships.component';
+import { SpeciesComponent } from './species/species.component';
+import { SpeciesDetailComponent } from './species-detail/species-detail.component';
+import { PlanetDetailComponent } from './planet-detail/planet-detail.component';
+import { PlanetsComponent } from './planets/planets.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
 const ROUTES: Route[] = [
   { path: 'home', component: HomeComponent}
@@ -24,7 +34,17 @@ const ROUTES: Route[] = [
     AppComponent,
     CharactersComponent,
     CharacterDetailComponent,
-    HomeComponent
+    HomeComponent,
+    FilmsComponent,
+    FilmDetailComponent,
+    StarshipDetailComponent,
+    StarshipsComponent,
+    SpeciesComponent,
+    SpeciesDetailComponent,
+    PlanetDetailComponent,
+    PlanetsComponent,
+    VehiclesComponent,
+    VehicleDetailComponent
 
   ],
   imports: [

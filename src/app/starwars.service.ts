@@ -17,6 +17,11 @@ export interface CharacterDetail {
 
 }
 
+export interface Film {
+    url: string;
+    title: string;
+}
+
 @Injectable()
 export class StarwarsService {
     // constructor(private http: HttpClient,
@@ -82,24 +87,22 @@ export class StarwarsService {
         );
     }
 
-    // getCharacterDetails(url: string): Promise<CharacterDetail> {
-    //     return (
-    //         this.http.get<CharacterDetail>(`${url}`)
-    //             .pipe(
-    //                 map(v => v['results'][0]),
-    //                 map((v: any) => {
-    //                     return (<CharacterDetail>{
-    //                         name: v.name,
-    //                         birth_year: v.birth_year,
-    //                         eye_color: v.eye_color,
-    //                         url: v.url,
-    //                     })
-    //                 })
-    //             )
-    //             .toPromise()
-    //     );
-    // }
+
+    getFilmList(page: number): Promise<Film[]> {
+        return (
+            this.http.get<Film[]>(`https://swapi.co/api/films/?page=${page}`)
+                .pipe(
+                    map(v => v['results']),
+                    flatMap(v => v),
+                    map((v: any) => {                       
+                        return (<Film>{ url: v.url, title: v.title });
+                    }),
+                    toArray()
+                )
+                .toPromise()
+        )
+    }
+
+   
 }
 
-
-//`https://swapi.co/api/people/${id}`
