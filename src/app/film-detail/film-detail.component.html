@@ -1,3 +1,30 @@
-<p>
-  film-detail works!
-</p>
+<main *ngIf="filmDetail">
+
+  <mat-card (swiperight)="back()">
+      <mat-card-header>
+        <mat-card-title>{{ filmDetail?.name }}</mat-card-title>
+      </mat-card-header>
+      <!-- <img mat-card-image [src]="filmDetail?.image"> -->
+      <mat-card-content>
+        <p>Title: {{ filmDetail?.title }}</p>
+        <p>Episode: {{ filmDetail?.episode_id }}</p>
+        <p>Opening Crawl: {{ filmDetail?.opening_crawl }}</p>
+        <p>Director: {{ filmDetail?.director }}</p>
+        <p>Producer: {{ filmDetail?.producer }}</p>
+        <p>Release Date: {{ filmDetail?.release_date }}</p>
+        <p>Species: {{ filmDetail?.species }}</p>
+        <p>Starships: {{ filmDetail?.starships }}</p>
+        <p>Vehicles: {{ filmDetail?.vehicles }}</p>
+        <p>Characters: {{ filmDetail?.characters }}</p>
+        <p>Planets: {{ filmDetail?.planets }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card-actions fxLayoutAlign="end">
+      <button mat-raised-button (click)="back()">
+        <!-- <mat-icon>arrow_back</mat-icon> -->
+        Back
+      </button>
+    </mat-card-actions>
+
+</main>

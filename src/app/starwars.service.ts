@@ -29,6 +29,7 @@ export interface Film {
 }
 
 export interface FilmDetail {
+    title: string;
     url: string;
 
 }
@@ -132,9 +133,9 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
-                        var paras = v.url.split('/');
+                        //var paras = v.url.split('/');
                         //paras = paras.reverse();
-                        var id = paras[5];
+                        //var id = paras[5];
                         //var imageurl = '/assets/img/films/' + id + '.jpg';
                         return (<FilmDetail>{
                             title: v.title,
@@ -149,8 +150,6 @@ export class StarwarsService {
                             characters: v.characters,
                             planets: v.planets,
                             url: v.url,
-                            created: v.created,
-                            edited: v.edited
                         })
                     })
                 )

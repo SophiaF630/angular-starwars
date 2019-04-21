@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { FilmDetail, StarwarsService } from '../starwars.service';
 
 @Component({
   selector: 'app-film-detail',
@@ -7,9 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilmDetailComponent implements OnInit {
 
-  constructor() { }
+  filmDetail: FilmDetail;
+
+  constructor(
+    private route: ActivatedRoute,
+    private starwarsService: StarwarsService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+    this.starwarsService.getFilmDetails(this.route.snapshot.params.title)
+      .then(result => {
+        this.filmDetail = result;
+        console.info('filmDetail: ', result)
+      })
   }
+
+
+  back() {
+    //this.router.navigate(['/']);
+    this.location.back();
+  }
+
 
 }
