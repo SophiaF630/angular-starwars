@@ -16,10 +16,21 @@ export interface CharacterDetail {
     eye_color: string;
 
 }
+export interface CharacterPage {
+    count: number;
+    next: string;
+    previous: string;
+
+}
 
 export interface Film {
     url: string;
     title: string;
+}
+
+export interface FilmDetail {
+    url: string;
+
 }
 
 @Injectable()
@@ -44,7 +55,7 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results']),
                     flatMap(v => v),
-                    map((v: any) => {                       
+                    map((v: any) => {
                         return (<Character>{ url: v.url, name: v.name });
                     }),
                     toArray()
@@ -60,7 +71,7 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
-                        var paras  = v.url.split('/');
+                        var paras = v.url.split('/');
                         //paras = paras.reverse();
                         var id = paras[5];
                         var imageurl = '/assets/img/characters/' + id + '.jpg';
@@ -87,6 +98,18 @@ export class StarwarsService {
         );
     }
 
+    getCharacterPreNextPage(page: number): Promise<CharacterPage> {
+        return (
+            this.http.get<CharacterPage[]>(`https://swapi.co/api/people/?page=${page}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<CharacterPage>{ count: v.count, next: v.next, previous: v.previous })
+                    })
+                )
+                .toPromise()
+        )
+    }
 
     getFilmList(page: number): Promise<Film[]> {
         return (
@@ -94,7 +117,7 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results']),
                     flatMap(v => v),
-                    map((v: any) => {                       
+                    map((v: any) => {
                         return (<Film>{ url: v.url, title: v.title });
                     }),
                     toArray()
@@ -103,6 +126,38 @@ export class StarwarsService {
         )
     }
 
-   
+    getFilmDetails(title: string): Promise<FilmDetail> {
+        return (
+            this.http.get<FilmDetail>(`https://swapi.co/api/films/?search=${title}`)
+                .pipe(
+                    map(v => v['results'][0]),
+                    map((v: any) => {
+                        var paras = v.url.split('/');
+                        //paras = paras.reverse();
+                        var id = paras[5];
+                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        return (<FilmDetail>{
+                            title: v.title,
+                            episode_id: v.episode_id,
+                            opening_crawl: v.opening_crawl,
+                            director: v.director,
+                            producer: v.producer,
+                            release_date: v.release_date,
+                            species: v.species,
+                            starships: v.starships,
+                            vehicles: v.vehicles,
+                            characters: v.characters,
+                            planets: v.planets,
+                            url: v.url,
+                            created: v.created,
+                            edited: v.edited
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
+
 }
 
