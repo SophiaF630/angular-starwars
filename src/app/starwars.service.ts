@@ -34,6 +34,23 @@ export interface FilmDetail {
 
 }
 
+export interface Species{
+    url: string;
+    name: string;
+}
+
+export interface SpeciesDetail{
+    url: string;
+    name: string;
+}
+
+export interface SpeciesPage {
+    count: number;
+    next: string;
+    previous: string;
+
+}
+
 @Injectable()
 export class StarwarsService {
     // constructor(private http: HttpClient,
@@ -155,6 +172,65 @@ export class StarwarsService {
                 )
                 .toPromise()
         );
+    }
+
+    getSpeciesList(page: number): Promise<Species[]> {
+        return (
+            this.http.get<Species[]>(`https://swapi.co/api/species/?page=${page}`)
+                .pipe(
+                    map(v => v['results']),
+                    flatMap(v => v),
+                    map((v: any) => {
+                        return (<Species>{ url: v.url, name: v.name });
+                    }),
+                    toArray()
+                )
+                .toPromise()
+        )
+    }
+
+    getSpeciesDetails(name: string): Promise<SpeciesDetail> {
+        return (
+            this.http.get<SpeciesDetail>(`https://swapi.co/api/species/?search=${name}`)
+                .pipe(
+                    map(v => v['results'][0]),
+                    map((v: any) => {
+                        //var paras = v.url.split('/');
+                        //paras = paras.reverse();
+                        //var id = paras[5];
+                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        return (<SpeciesDetail>{
+                            name: v.name,
+                            classification: v.classification,
+                            designation: v.designation,
+                            average_height: v.average_height,
+                            average_lifespan: v.average_lifespan ,
+                            eye_colors: v.eye_colors,
+                            hair_colors: v.hair_colors,
+                            skin_colors: v.skin_colors,
+                            language: v.language,
+                            homeworld: v.homeworld,
+                            people: v.people,
+                            films: v.films,
+                            url: v.url,                           
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
+    getSpeciesPreNextPage(page: number): Promise<SpeciesPage> {
+        return (
+            this.http.get<SpeciesPage[]>(`https://swapi.co/api/species/?page=${page}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<SpeciesPage>{ count: v.count, next: v.next, previous: v.previous })
+                    })
+                )
+                .toPromise()
+        )
     }
 
 

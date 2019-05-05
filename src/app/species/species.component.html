@@ -1,3 +1,48 @@
-<p>
-  species works!
-</p>
+<h2>Species</h2>
+<main class="characters">
+  <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center" >
+    <div *ngIf="speciesPage?.previous == null" >
+        <button mat-raised-button color="primary" (click)="previous()" disabled>
+            Previous
+        </button>
+    </div>
+    <div *ngIf="speciesPage?.previous" >
+        <button mat-raised-button color="primary" (click)="previous()">
+            Previous
+        </button>
+    </div>
+    <div *ngIf="speciesPage?.next == null">
+        <button mat-raised-button color="primary" (click)="next()" disabled>
+          Next
+        </button>
+    </div>      
+    <div *ngIf="speciesPage?.next">
+        <button mat-raised-button color="primary" (click)="next()">
+            Next
+        </button>
+    </div>
+      
+  </mat-card-actions >
+
+  <mat-list *ngFor="let species of speciesList">
+    <mat-list-item class = "cardPadding">
+        <a routerLink="/speciesdetail/{{species.name}}">
+          {{ species.name }}
+        </a>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    
+  </mat-list>
+
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button
+    a routerLink="/home" >
+      <!-- <mat-icon>arrow_back</mat-icon> -->
+      Back
+    </button>
+  </mat-card-actions>
+</main>
+
+
+
+

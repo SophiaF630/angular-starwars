@@ -1,24 +1,5 @@
 <h2>Films</h2>
 <main class="characters">
-    <!-- <mat-card-actions  fxLayout="row" fxLayoutAlign="space-around center" >
-      <div *ngIf="page==1" >
-          <button mat-raised-button color="primary" (click)="previous()" disabled>
-              Previous
-          </button>
-      </div>
-      <div *ngIf="page>1" >
-          <button mat-raised-button color="primary" (click)="previous()">
-              Previous
-          </button>
-      </div>
-      <div>
-          <button mat-raised-button color="primary" (click)="next()">
-              Next
-          </button>
-      </div>
-        
-    </mat-card-actions > -->
-
   <mat-list *ngFor="let film of films">
     <mat-list-item class = "cardPadding">
         <a routerLink="/filmdetail/{{film.title}}">
@@ -31,7 +12,7 @@
 
   <mat-card-actions fxLayoutAlign="end">
     <button mat-raised-button
-    a routerLink="/home" (click)="back()">
+    a routerLink="/home">
       <!-- <mat-icon>arrow_back</mat-icon> -->
       Back
     </button>

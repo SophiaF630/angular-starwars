@@ -7,6 +7,8 @@ import { CharactersComponent } from './characters/characters.component';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 import { FilmsComponent } from './films/films.component';
 import { FilmDetailComponent } from './film-detail/film-detail.component';
+import { SpeciesComponent } from './species/species.component';
+import { SpeciesDetailComponent } from './species-detail/species-detail.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'characterdetail/:name', component: CharacterDetailComponent },
   { path: 'characters/page/:page', component: CharactersComponent },
   { path: 'filmdetail/:title', component: FilmDetailComponent },
-  { path: 'films/page/:page', component: FilmsComponent }
+  { path: 'films/page/:page', component: FilmsComponent },
+  { path: 'speciesdetail/:name', component: SpeciesDetailComponent },
+  { path: 'species/page/:page', component: SpeciesComponent }
 
 ];
 
