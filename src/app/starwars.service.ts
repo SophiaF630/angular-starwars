@@ -51,6 +51,57 @@ export interface SpeciesPage {
 
 }
 
+export interface Starship{
+    url: string;
+    name: string;
+}
+
+export interface StarshipDetail{
+    url: string;
+    name: string;
+}
+
+export interface StarshipPage {
+    count: number;
+    next: string;
+    previous: string;
+
+}
+
+export interface Vehicle{
+    url: string;
+    name: string;
+}
+
+export interface VehicleDetail{
+    url: string;
+    name: string;
+}
+
+export interface VehiclePage {
+    count: number;
+    next: string;
+    previous: string;
+
+}
+
+export interface Planet{
+    url: string;
+    name: string;
+}
+
+export interface PlanetDetail{
+    url: string;
+    name: string;
+}
+
+export interface PlanetPage {
+    count: number;
+    next: string;
+    previous: string;
+
+}
+
 @Injectable()
 export class StarwarsService {
     // constructor(private http: HttpClient,
@@ -233,6 +284,185 @@ export class StarwarsService {
         )
     }
 
+    getStarshipList(page: number): Promise<Starship[]> {
+        return (
+            this.http.get<Starship[]>(`https://swapi.co/api/starships/?page=${page}`)
+                .pipe(
+                    map(v => v['results']),
+                    flatMap(v => v),
+                    map((v: any) => {
+                        return (<Starship>{ url: v.url, name: v.name });
+                    }),
+                    toArray()
+                )
+                .toPromise()
+        )
+    }
+
+    getStarshipDetails(name: string): Promise<StarshipDetail> {
+        return (
+            this.http.get<StarshipDetail>(`https://swapi.co/api/starships/?search=${name}`)
+                .pipe(
+                    map(v => v['results'][0]),
+                    map((v: any) => {
+                        //var paras = v.url.split('/');
+                        //paras = paras.reverse();
+                        //var id = paras[5];
+                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        return (<StarshipDetail>{
+                            name: v.name,
+                            model: v.model,
+                            starship_class: v.starship_class,
+                            manufacturer: v.manufacturer,
+                            cost_in_credits: v.cost_in_credits ,
+                            length: v.length,
+                            crew: v.crew,
+                            passengers: v.passengers,
+                            max_atmosphering_speed: v.max_atmosphering_speed,
+                            hyperdrive_rating: v.hyperdrive_rating,
+                            MGLT: v.MGLT,
+                            cargo_capacity: v.cargo_capacity,
+                            consumables: v.consumables,
+                            films: v.films,
+                            pilots: v.pilots,
+                            url: v.url                           
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
+    getStarshipPreNextPage(page: number): Promise<StarshipPage> {
+        return (
+            this.http.get<StarshipPage[]>(`https://swapi.co/api/starships/?page=${page}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<StarshipPage>{ count: v.count, next: v.next, previous: v.previous })
+                    })
+                )
+                .toPromise()
+        )
+    }
+
+    getVehicleList(page: number): Promise<Vehicle[]> {
+        return (
+            this.http.get<Vehicle[]>(`https://swapi.co/api/vehicles/?page=${page}`)
+                .pipe(
+                    map(v => v['results']),
+                    flatMap(v => v),
+                    map((v: any) => {
+                        return (<Vehicle>{ url: v.url, name: v.name });
+                    }),
+                    toArray()
+                )
+                .toPromise()
+        )
+    }
+
+    getVehicleDetails(name: string): Promise<VehicleDetail> {
+        return (
+            this.http.get<VehicleDetail>(`https://swapi.co/api/vehicles/?search=${name}`)
+                .pipe(
+                    map(v => v['results'][0]),
+                    map((v: any) => {
+                        //var paras = v.url.split('/');
+                        //paras = paras.reverse();
+                        //var id = paras[5];
+                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        return (<VehicleDetail>{
+                            name: v.name,
+                            model: v.model,
+                            vehicle_class: v.vehicle_class,
+                            manufacturer: v.manufacturer,
+                            cost_in_credits: v.cost_in_credits ,
+                            length: v.length,
+                            crew: v.crew,
+                            passengers: v.passengers,
+                            max_atmosphering_speed: v.max_atmosphering_speed,
+                            cargo_capacity: v.cargo_capacity,
+                            consumables: v.consumables,
+                            films: v.films,
+                            pilots: v.pilots,
+                            url: v.url                           
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
+    getVehiclePreNextPage(page: number): Promise<VehiclePage> {
+        return (
+            this.http.get<VehiclePage[]>(`https://swapi.co/api/vehicles/?page=${page}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<VehiclePage>{ count: v.count, next: v.next, previous: v.previous })
+                    })
+                )
+                .toPromise()
+        )
+    }
+
+    getPlanetList(page: number): Promise<Planet[]> {
+        return (
+            this.http.get<Planet[]>(`https://swapi.co/api/planets/?page=${page}`)
+                .pipe(
+                    map(v => v['results']),
+                    flatMap(v => v),
+                    map((v: any) => {
+                        return (<Planet>{ url: v.url, name: v.name });
+                    }),
+                    toArray()
+                )
+                .toPromise()
+        )
+    }
+
+    getPlanetDetails(name: string): Promise<PlanetDetail> {
+        return (
+            this.http.get<PlanetDetail>(`https://swapi.co/api/planets/?search=${name}`)
+                .pipe(
+                    map(v => v['results'][0]),
+                    map((v: any) => {
+                        //var paras = v.url.split('/');
+                        //paras = paras.reverse();
+                        //var id = paras[5];
+                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        return (<PlanetDetail>{
+                            name: v.name,
+                            diameter: v.diameter,
+                            rotation_period: v.rotation_period,
+                            orbital_period: v.orbital_period,
+                            gravity: v.gravity ,
+                            population: v.population,
+                            climate: v.climate,
+                            terrain: v.terrain,
+                            surface_water: v.surface_water,
+                            residents: v.residents,
+                            films: v.films,
+                            url: v.url                           
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    } 
+
+    getPlanetPreNextPage(page: number): Promise<PlanetPage> {
+        return (
+            this.http.get<PlanetPage[]>(`https://swapi.co/api/planets/?page=${page}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<PlanetPage>{ count: v.count, next: v.next, previous: v.previous })
+                    })
+                )
+                .toPromise()
+        )
+    }
 
 }
 

@@ -1,3 +1,48 @@
-<p>
-  vehicles works!
-</p>
+<h2>Vehicles</h2>
+<main class="characters">
+  <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center" >
+    <div *ngIf="vehiclePage?.previous == null" >
+        <button mat-raised-button color="primary" (click)="previous()" disabled>
+            Previous
+        </button>
+    </div>
+    <div *ngIf="vehiclePage?.previous" >
+        <button mat-raised-button color="primary" (click)="previous()">
+            Previous
+        </button>
+    </div>
+    <div *ngIf="vehiclePage?.next == null">
+        <button mat-raised-button color="primary" (click)="next()" disabled>
+          Next
+        </button>
+    </div>      
+    <div *ngIf="vehiclePage?.next">
+        <button mat-raised-button color="primary" (click)="next()">
+            Next
+        </button>
+    </div>
+      
+  </mat-card-actions >
+
+  <mat-list *ngFor="let vehicle of vehicleList">
+    <mat-list-item class = "cardPadding">
+      <a routerLink="/vehicledetail/{{vehicle.name}}">
+        {{ vehicle.name }}
+      </a>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    
+  </mat-list>
+
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button
+    a routerLink="/home" >
+      <!-- <mat-icon>arrow_back</mat-icon> -->
+      Back
+    </button>
+  </mat-card-actions>
+</main>
+
+
+
+
