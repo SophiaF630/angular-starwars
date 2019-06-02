@@ -1,3 +1,33 @@
-<p>
-  vehicle-detail works!
-</p>
+<main *ngIf="vehicleDetail">
+
+  <mat-card (swiperight)="back()">
+    <mat-card-header>
+      <mat-card-title>{{ vehicleDetail?.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="vehicleDetail?.image">
+    <mat-card-content>
+      <p>Name: {{ vehicleDetail?.name }}</p>
+      <p>Model: {{ vehicleDetail?.model }}</p>
+      <p>Vehicle Class: {{ vehicleDetail?.vehicle_class }}</p>
+      <p>Manufacturer: {{ vehicleDetail?.manufacturer }}</p>
+      <p>Cost in credits: {{ vehicleDetail?.cost_in_credits }}</p>
+      <p>Length: {{ vehicleDetail?.length }}</p>
+      <p>Crew: {{ vehicleDetail?.crew }}</p>
+      <p>Passengers: {{ vehicleDetail?.passengers }}</p>
+      <p>Max Atmosphering Speed: {{ vehicleDetail?.max_atmosphering_speed }}</p>
+      <p>Cargo Capacity: {{ vehicleDetail?.cargo_capacity }}</p>
+      <p>Consumables: {{ vehicleDetail?.consumables }}</p>
+      <p>Films: {{ vehicleDetail?.films }}</p>
+      <p>Pilots: {{ vehicleDetail?.pilots }}</p>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button a routerLink="/home">
+      <!-- <mat-icon>arrow_back</mat-icon> -->
+      Back
+    </button>
+  </mat-card-actions>
+
+</main>

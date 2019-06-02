@@ -1,3 +1,35 @@
-<p>
-  starship-detail works!
-</p>
+<main *ngIf="starshipDetail">
+
+  <mat-card (swiperight)="back()">
+    <mat-card-header>
+      <mat-card-title>{{ starshipDetail?.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="starshipDetail?.image">
+    <mat-card-content>
+      <p>Name: {{ starshipDetail?.name }}</p>
+      <p>Model: {{ starshipDetail?.model }}</p>
+      <p>Starship Class: {{ starshipDetail?.starship_class }}</p>
+      <p>Manufacturer: {{ starshipDetail?.manufacturer }}</p>
+      <p>Cost in Credits: {{ starshipDetail?.cost_in_credits }}</p>
+      <p>Length: {{ starshipDetail?.length }}</p>
+      <p>Crew: {{ starshipDetail?.crew }}</p>
+      <p>Passengers: {{ starshipDetail?.passengers }}</p>
+      <p>Max Atmosphering Speed: {{ starshipDetail?.max_atmosphering_speed }}</p>
+      <p>Hyperdrive Rating: {{ starshipDetail?.hyperdrive_rating }}</p>
+      <p>MGLT: {{ starshipDetail?.MGLT }}</p>
+      <p>Cargo Capacity: {{ starshipDetail?.cargo_capacity }}</p>
+      <p>Consumables: {{ starshipDetail?.consumables }}</p>
+      <p>Films: {{ starshipDetail?.films }}</p>
+      <p>Pilots: {{ starshipDetail?.pilots }}</p>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button a routerLink="/home">
+      <!-- <mat-icon>arrow_back</mat-icon> -->
+      Back
+    </button>
+  </mat-card-actions>
+
+</main>

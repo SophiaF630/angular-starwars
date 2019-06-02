@@ -1,3 +1,31 @@
-<p>
-  species-detail works!
-</p>
+<main *ngIf="speciesDetail">
+
+  <mat-card (swiperight)="back()">
+    <mat-card-header>
+      <mat-card-title>{{ speciesDetail?.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="speciesDetail?.image">
+    <mat-card-content>
+      <p>Name: {{ speciesDetail?.name }}</p>
+      <p>Classification: {{ speciesDetail?.classification }}</p>
+      <p>Designation: {{ speciesDetail?.designation }}</p>
+      <p>Average Height: {{ speciesDetail?.average_height }}</p>
+      <p>Average Lifespan: {{ speciesDetail?.average_lifespan }}</p>
+      <p>Eye Colors: {{ speciesDetail?.eye_colors }}</p>
+      <p>Hair Colors: {{ speciesDetail?.hair_colors }}</p>
+      <p>Skin Colors: {{ speciesDetail?.skin_colors }}</p>
+      <p>Language: {{ speciesDetail?.language }}</p>
+      <p>Homeworld: {{ speciesDetail?.homeworld }}</p>
+      <p>People: {{ speciesDetail?.people }}</p>
+      <p>Films: {{ speciesDetail?.films }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button a routerLink="/home">
+      <!-- <mat-icon>arrow_back</mat-icon> -->
+      Back
+    </button>
+  </mat-card-actions>
+
+</main>

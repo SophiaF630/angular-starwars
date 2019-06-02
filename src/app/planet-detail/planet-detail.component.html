@@ -1,3 +1,31 @@
-<p>
-  planet-detail works!
-</p>
+<main *ngIf="planetDetail">
+
+  <mat-card (swiperight)="back()">
+    <mat-card-header>
+      <mat-card-title>{{ planetDetail?.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="planetDetail?.image">
+    <mat-card-content>
+      <p>Name: {{ planetDetail?.name }}</p>
+      <p>Diameter: {{ planetDetail?.diameter }}</p>
+      <p>Rotation Period: {{ planetDetail?.rotation_period }}</p>
+      <p>Orbital Period: {{ planetDetail?.orbital_period }}</p>
+      <p>Gravity: {{ planetDetail?.gravity }}</p>
+      <p>Population: {{ planetDetail?.population }}</p>
+      <p>Climate: {{ planetDetail?.climate }}</p>
+      <p>Terrain: {{ planetDetail?.terrain }}</p>
+      <p>Surface Water: {{ planetDetail?.surface_water }}</p>
+      <p>Residents: {{ planetDetail?.residents }}</p>
+      <p>Films: {{ planetDetail?.films }}</p>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button a routerLink="/home">
+      <!-- <mat-icon>arrow_back</mat-icon> -->
+      Back
+    </button>
+  </mat-card-actions>
+
+</main>
