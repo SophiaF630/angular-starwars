@@ -7,7 +7,8 @@
       <img mat-card-image [src]="characterDetail?.image">
       <mat-card-content>
         <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-        <p>Species: {{ characterDetail?.species }}</p>
+        <p>Species: {{ characterDetail?.speciesDetail }}</p>
+        <p>Species: {{characterDetail?.speciesDetail?.name}}</p>
         <p>Gender: {{ characterDetail?.gender }}</p>
         <p>Height: {{ characterDetail?.height }}</p>
         <p>Mass: {{ characterDetail?.mass }}</p>

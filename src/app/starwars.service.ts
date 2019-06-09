@@ -201,10 +201,9 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
-                        //var paras = v.url.split('/');
-                        //paras = paras.reverse();
-                        //var id = paras[5];
-                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        var paras = v.url.split('/');
+                        var id = paras[5];
+                        var imageurl = '/assets/img/films/' + id + '.jpg';
                         return (<FilmDetail>{
                             title: v.title,
                             episode_id: v.episode_id,
@@ -218,6 +217,7 @@ export class StarwarsService {
                             characters: v.characters,
                             planets: v.planets,
                             url: v.url,
+                            image: imageurl,
                         })
                     })
                 )
@@ -246,10 +246,9 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
-                        //var paras = v.url.split('/');
-                        //paras = paras.reverse();
-                        //var id = paras[5];
-                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        var paras = v.url.split('/');
+                        var id = paras[5];
+                        var imageurl = '/assets/img/species/' + id + '.jpg';
                         return (<SpeciesDetail>{
                             name: v.name,
                             classification: v.classification,
@@ -263,7 +262,8 @@ export class StarwarsService {
                             homeworld: v.homeworld,
                             people: v.people,
                             films: v.films,
-                            url: v.url,                           
+                            url: v.url,   
+                            image: imageurl,                       
                         })
                     })
                 )
@@ -305,10 +305,9 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
-                        //var paras = v.url.split('/');
-                        //paras = paras.reverse();
-                        //var id = paras[5];
-                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        var paras = v.url.split('/');
+                        var id = paras[5];
+                        var imageurl = '/assets/img/starships/' + id + '.jpg';
                         return (<StarshipDetail>{
                             name: v.name,
                             model: v.model,
@@ -325,7 +324,8 @@ export class StarwarsService {
                             consumables: v.consumables,
                             films: v.films,
                             pilots: v.pilots,
-                            url: v.url                           
+                            url: v.url,
+                            image: imageurl,                         
                         })
                     })
                 )
@@ -367,10 +367,9 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
-                        //var paras = v.url.split('/');
-                        //paras = paras.reverse();
-                        //var id = paras[5];
-                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        var paras = v.url.split('/');
+                        var id = paras[5];
+                        var imageurl = '/assets/img/vehicles/' + id + '.jpg';
                         return (<VehicleDetail>{
                             name: v.name,
                             model: v.model,
@@ -385,7 +384,8 @@ export class StarwarsService {
                             consumables: v.consumables,
                             films: v.films,
                             pilots: v.pilots,
-                            url: v.url                           
+                            url: v.url,
+                            image: imageurl,                           
                         })
                     })
                 )
@@ -427,10 +427,9 @@ export class StarwarsService {
                 .pipe(
                     map(v => v['results'][0]),
                     map((v: any) => {
-                        //var paras = v.url.split('/');
-                        //paras = paras.reverse();
-                        //var id = paras[5];
-                        //var imageurl = '/assets/img/films/' + id + '.jpg';
+                        var paras = v.url.split('/');
+                        var id = paras[5];
+                        var imageurl = '/assets/img/planets/' + id + '.jpg';
                         return (<PlanetDetail>{
                             name: v.name,
                             diameter: v.diameter,
@@ -443,7 +442,8 @@ export class StarwarsService {
                             surface_water: v.surface_water,
                             residents: v.residents,
                             films: v.films,
-                            url: v.url                           
+                            url: v.url,
+                            image: imageurl,                           
                         })
                     })
                 )

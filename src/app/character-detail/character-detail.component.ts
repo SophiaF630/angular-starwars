@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { CharacterDetail, StarwarsService } from '../starwars.service';
+import { CharacterDetail, SpeciesDetail, StarwarsService } from '../starwars.service';
 
 
 @Component({
@@ -16,6 +16,7 @@ import { CharacterDetail, StarwarsService } from '../starwars.service';
 export class CharacterDetailComponent implements OnInit {
 
   characterDetail: CharacterDetail;
+  speciesDetail: SpeciesDetail;
   //@Input() character: Character;
 
   constructor(
@@ -32,11 +33,6 @@ export class CharacterDetailComponent implements OnInit {
         this.characterDetail = result;
         console.info('characterDetail: ', result)
       })
-  }
-
- 
-  goBack(): void {
-    this.location.back();
   }
 
   back() {
