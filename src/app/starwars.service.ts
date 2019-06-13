@@ -12,8 +12,11 @@ export interface Character {
 export interface CharacterDetail {
     url: string;
     name: string;
-    birth_year: string;
-    eye_color: string;
+    species: string[];
+    starships: string[];
+    planet: string;
+    films: string[];
+    vehicles: string[];
 
 }
 export interface CharacterPage {
@@ -31,6 +34,11 @@ export interface Film {
 export interface FilmDetail {
     title: string;
     url: string;
+    species: string[];
+    starships: string[];
+    planets: string[];
+    characters: string[];
+    vehicles: string[];
 
 }
 
@@ -42,6 +50,9 @@ export interface Species{
 export interface SpeciesDetail{
     url: string;
     name: string;
+    films: string[];
+    planet: string;
+    characters: string[];
 }
 
 export interface SpeciesPage {
@@ -133,7 +144,6 @@ export class StarwarsService {
         )
     }
 
-
     getCharacterDetails(name: string): Promise<CharacterDetail> {
         return (
             this.http.get<CharacterDetail>(`https://swapi.co/api/people/?search=${name}`)
@@ -141,9 +151,13 @@ export class StarwarsService {
                     map(v => v['results'][0]),
                     map((v: any) => {
                         var paras = v.url.split('/');
-                        //paras = paras.reverse();
                         var id = paras[5];
                         var imageurl = '/assets/img/characters/' + id + '.jpg';
+                        var species: Species;
+                        // this.getSpeciesDetailsByUrl(v.species).then(result=>{
+                        //     speciesDtl = result;
+                        //     console.info('characterDetail: ', result)
+                        //   });
                         return (<CharacterDetail>{
                             name: v.name,
                             birth_year: v.birth_year,
@@ -154,12 +168,28 @@ export class StarwarsService {
                             hair_color: v.hair_color,
                             skin_color: v.skin_color,
                             eye_color: v.eye_color,
-                            homeworld: v.homeworld,
+                            planet: v.homeworld,
                             films: v.films,
                             starships: v.starships,
                             vehicles: v.vehicles,
                             url: v.url,
                             image: imageurl,
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
+    getCharacterByUrl(url: string): Promise<Character> {
+        return (
+            this.http.get<Character>(`${url}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<Character>{
+                            name: v.name,
+                            url: v.url,
                         })
                     })
                 )
@@ -225,6 +255,22 @@ export class StarwarsService {
         );
     }
 
+    getFilmByUrl(url: string): Promise<Film> {
+        return (
+            this.http.get<Film>(`${url}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<FilmDetail>{
+                            title: v.title,
+                            url: v.url,
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
     getSpeciesList(page: number): Promise<Species[]> {
         return (
             this.http.get<Species[]>(`https://swapi.co/api/species/?page=${page}`)
@@ -259,8 +305,8 @@ export class StarwarsService {
                             hair_colors: v.hair_colors,
                             skin_colors: v.skin_colors,
                             language: v.language,
-                            homeworld: v.homeworld,
-                            people: v.people,
+                            planet: v.homeworld,
+                            characters: v.people,
                             films: v.films,
                             url: v.url,   
                             image: imageurl,                       
@@ -270,6 +316,23 @@ export class StarwarsService {
                 .toPromise()
         );
     }
+
+    getSpeciesByUrl(url:string): Promise<Species> {
+        return (
+            this.http.get<Species>(`${url}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<Species>{
+                            name: v.name,
+                            url: v.url,                      
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
 
     getSpeciesPreNextPage(page: number): Promise<SpeciesPage> {
         return (
@@ -326,6 +389,22 @@ export class StarwarsService {
                             pilots: v.pilots,
                             url: v.url,
                             image: imageurl,                         
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
+    getStarshipByUrl(url: string): Promise<Starship> {
+        return (
+            this.http.get<Starship>(`${url}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<Starship>{
+                            name: v.name,
+                            url: v.url,                      
                         })
                     })
                 )
@@ -393,6 +472,22 @@ export class StarwarsService {
         );
     }
 
+    getVehicleByUrl(url: string): Promise<Vehicle> {
+        return (
+            this.http.get<Vehicle>(`${url}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<Vehicle>{
+                            name: v.name,
+                            url: v.url,                         
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    }
+
     getVehiclePreNextPage(page: number): Promise<VehiclePage> {
         return (
             this.http.get<VehiclePage[]>(`https://swapi.co/api/vehicles/?page=${page}`)
@@ -444,6 +539,22 @@ export class StarwarsService {
                             films: v.films,
                             url: v.url,
                             image: imageurl,                           
+                        })
+                    })
+                )
+                .toPromise()
+        );
+    } 
+
+    getPlanetByUrl(url: string): Promise<Planet> {
+        return (
+            this.http.get<Planet>(`${url}`)
+                .pipe(
+                    map(v => v),
+                    map((v: any) => {
+                        return (<Planet>{
+                            name: v.name,
+                            url: v.url,                         
                         })
                     })
                 )

@@ -12,11 +12,11 @@
         <p>Director: {{ filmDetail?.director }}</p>
         <p>Producer: {{ filmDetail?.producer }}</p>
         <p>Release Date: {{ filmDetail?.release_date }}</p>
-        <p>Species: {{ filmDetail?.species }}</p>
-        <p>Starships: {{ filmDetail?.starships }}</p>
-        <p>Vehicles: {{ filmDetail?.vehicles }}</p>
-        <p>Characters: {{ filmDetail?.characters }}</p>
-        <p>Planets: {{ filmDetail?.planets }}</p>
+        <p>Species: <a *ngFor="let species1 of species" routerLink="/speciesdetail/{{species1?.name}}">{{species1?.name}}</a></p>
+        <p>Starships: <a *ngFor="let starship of starships" routerLink="/starshipdetail/{{starship?.name}}">{{starship?.name}}</a></p>
+        <p>Vehicles: <a *ngFor="let vehicle of vehicles" routerLink="/vehicledetail/{{vehicle?.name}}">{{vehicle?.name}}</a></p>
+        <p>Characters: <a *ngFor="let character of characters" routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
+        <p>Planets: <a *ngFor="let planet of planets" routerLink="/planetdetail/{{planet?.name}}">{{planet?.name}}</a></p>
       </mat-card-content>
     </mat-card>
 

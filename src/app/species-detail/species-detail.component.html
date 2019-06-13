@@ -15,9 +15,9 @@
       <p>Hair Colors: {{ speciesDetail?.hair_colors }}</p>
       <p>Skin Colors: {{ speciesDetail?.skin_colors }}</p>
       <p>Language: {{ speciesDetail?.language }}</p>
-      <p>Homeworld: {{ speciesDetail?.homeworld }}</p>
-      <p>People: {{ speciesDetail?.people }}</p>
-      <p>Films: {{ speciesDetail?.films }}</p>
+      <p>Homeworld: <a routerLink="/planetdetail/{{planet?.name}}">{{planet?.name}}</a></p>
+      <p>Characters: <a *ngFor="let character of characters" routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
+      <p>Films: <a *ngFor="let film of films" routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
     </mat-card-content>
   </mat-card>
 

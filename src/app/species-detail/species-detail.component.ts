@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { SpeciesDetail, StarwarsService } from '../starwars.service';
+import { SpeciesDetail, StarwarsService, Character, Planet, Film } from '../starwars.service';
 
 @Component({
   selector: 'app-species-detail',
@@ -12,7 +12,9 @@ import { SpeciesDetail, StarwarsService } from '../starwars.service';
 export class SpeciesDetailComponent implements OnInit {
 
   speciesDetail: SpeciesDetail;
-  //@Input() character: Character;
+  planet: Planet;
+  films: Film[] = [];
+  characters: Character[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,12 +23,29 @@ export class SpeciesDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //var name = this.route.snapshot.params.name;
-    //var url = this.starwarsService.getCharacterList.findbyName(name).url;
     this.starwarsService.getSpeciesDetails(this.route.snapshot.params.name)
       .then(result => {
         this.speciesDetail = result;
         console.info('speciesDetail: ', result)
+
+        this.starwarsService.getPlanetByUrl(result.planet)
+        .then(result => {
+          this.planet = result;
+        })
+
+      for (var i = 0, len = result.films.length; i < len; i++) {
+        this.starwarsService.getFilmByUrl(result.films[i])
+          .then(result => {
+            this.films.push(result);
+          })
+      }
+
+      for (var i = 0, len = result.characters.length; i < len; i++) {
+        this.starwarsService.getCharacterByUrl(result.characters[i])
+          .then(result => {
+            this.characters.push(result);
+          })
+      }
       })
   }
 

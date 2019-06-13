@@ -6,19 +6,18 @@
       </mat-card-header>
       <img mat-card-image [src]="characterDetail?.image">
       <mat-card-content>
-        <p>Birth Year: {{ characterDetail?.birth_year }}</p>
-        <p>Species: {{ characterDetail?.speciesDetail }}</p>
-        <p>Species: {{characterDetail?.speciesDetail?.name}}</p>
+        <p>Birth Year: {{ characterDetail?.birth_year }}</p>      
+        <p>Species: <a *ngFor="let species1 of species" routerLink="/speciesdetail/{{species1?.name}}">{{species1?.name}}</a></p>
         <p>Gender: {{ characterDetail?.gender }}</p>
         <p>Height: {{ characterDetail?.height }}</p>
         <p>Mass: {{ characterDetail?.mass }}</p>
         <p>Hair Color: {{ characterDetail?.hair_color }}</p>
         <p>Skin Color: {{ characterDetail?.skin_color }}</p>
         <p>Eye Color: {{ characterDetail?.eye_color }}</p>
-        <p>Homeworld: {{ characterDetail?.homeworld }}</p>
-        <p>Films: {{ characterDetail?.films }}</p>
-        <p>Starships: {{ characterDetail?.starships }}</p>
-        <p>Vehicles: {{ characterDetail?.vehicles }}</p>
+        <p>Homeworld: <a routerLink="/planetdetail/{{planet?.name}}">{{planet?.name}}</a></p>
+        <p>Films: <a *ngFor="let film of films" routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
+        <p>Starships: <a *ngFor="let starship of starships" routerLink="/starshipdetail/{{starship?.name}}">{{starship?.name}}</a></p>
+        <p>Vehicles: <a *ngFor="let vehicle of vehicles" routerLink="/vehicledetail/{{vehicle?.name}}">{{vehicle?.name}}</a></p>
       </mat-card-content>
     </mat-card>
 
