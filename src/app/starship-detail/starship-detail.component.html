@@ -1,42 +1,36 @@
 <main *ngIf="starshipDetail">
-
-  <mat-card (swiperight)="back()">
+  <mat-card class="post-tile">
     <mat-card-header>
-      <mat-card-title>{{ starshipDetail?.name }}</mat-card-title>
+      <mat-card-title><strong>{{ starshipDetail?.name }}</strong></mat-card-title>
     </mat-card-header>
     <img mat-card-image [src]="starshipDetail?.image">
     <mat-card-content>
-      <p>Name: {{ starshipDetail?.name }}</p>
-      <p>Model: {{ starshipDetail?.model }}</p>
-      <p>Starship Class: {{ starshipDetail?.starship_class }}</p>
-      <p>Manufacturer: {{ starshipDetail?.manufacturer }}</p>
-      <p>Cost in Credits: {{ starshipDetail?.cost_in_credits }}</p>
-      <p>Length: {{ starshipDetail?.length }}</p>
-      <p>Crew: {{ starshipDetail?.crew }}</p>
-      <p>Passengers: {{ starshipDetail?.passengers }}</p>
-      <p>Max Atmosphering Speed: {{ starshipDetail?.max_atmosphering_speed }}</p>
-      <p>Hyperdrive Rating: {{ starshipDetail?.hyperdrive_rating }}</p>
-      <p>MGLT: {{ starshipDetail?.MGLT }}</p>
-      <p>Cargo Capacity: {{ starshipDetail?.cargo_capacity }}</p>
-      <p>Consumables: {{ starshipDetail?.consumables }}</p>
-      <p>Films: <a *ngFor="let film of films" routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
-      <p>Pilots: </p>
-      <div *ngIf="characters == [], else NA">
+      <p><strong>Model:</strong> {{ starshipDetail?.model }}</p>
+      <p><strong>Starship Class: </strong>{{ starshipDetail?.starship_class }}</p>
+      <p><strong>Manufacturer: </strong>{{ starshipDetail?.manufacturer }}</p>
+      <p><strong>Cost in Credits: </strong>{{ starshipDetail?.cost_in_credits }}</p>
+      <p><strong>Length: </strong>{{ starshipDetail?.length }}</p>
+      <p><strong>Crew: </strong>{{ starshipDetail?.crew }}</p>
+      <p><strong>Passengers: </strong>{{ starshipDetail?.passengers }}</p>
+      <p><strong>Max Atmosphering Speed: </strong>{{ starshipDetail?.max_atmosphering_speed }}</p>
+      <p><strong>Hyperdrive Rating: </strong>{{ starshipDetail?.hyperdrive_rating }}</p>
+      <p><strong>MGLT: </strong>{{ starshipDetail?.MGLT }}</p>
+      <p><strong>Cargo Capacity: </strong>{{ starshipDetail?.cargo_capacity }}</p>
+      <p><strong>Consumables: </strong>{{ starshipDetail?.consumables }}</p>
+      <p><strong>Films: </strong></p>
+      <div *ngIf="films.length != 0, else NA">
+        <div *ngFor="let film of films">
+            <p class="para"><a routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
+        </div>        
+      </div>
+      <p><strong>Piolts: </strong></p>
+      <div *ngIf="characters.length != 0, else NA">
         <a *ngFor="let character of characters"
           routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a>
       </div>
-
     </mat-card-content>
   </mat-card>
-
-  <mat-card-actions fxLayoutAlign="end">
-    <button mat-raised-button a routerLink="/home">
-      <!-- <mat-icon>arrow_back</mat-icon> -->
-      Back
-    </button>
-  </mat-card-actions>
-
   <ng-template #NA>
-    <p>N.A.</p>
+    <p>There is no related item.</p>
   </ng-template>
 </main>

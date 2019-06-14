@@ -97,3 +97,21 @@ h1 {
     color: #ccc;
     cursor: auto;
   }
+  .post-tile {
+    align-self: flex-start;
+    width: 100%;
+    margin: 5px;
+  }
+  .post-tile .mat-card-image {
+    max-height: 300px;
+    max-width: 450px;
+  }  
+  a {
+    text-decoration: none;
+   }
+   a:hover {
+    text-decoration:underline;
+   }
+   .para{
+     margin: 8px;
+   }

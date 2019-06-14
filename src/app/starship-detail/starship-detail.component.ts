@@ -25,7 +25,8 @@ export class StarshipDetailComponent implements OnInit {
     this.starwarsService.getStarshipDetails(this.route.snapshot.params.name)
       .then(result => {
         this.starshipDetail = result;
-        console.info('starshipDetail: ', result)
+        console.info('starshipDetail: ', result)     
+        console.log('film: ', result.films)
 
         for (var i = 0, len = result.films.length; i < len; i++) {
           this.starwarsService.getFilmByUrl(result.films[i])
@@ -40,7 +41,7 @@ export class StarshipDetailComponent implements OnInit {
               this.characters.push(result);
             })
         }
-        console.info('cha: ', this.characters)
+       // console.log('film: ', this.films)
       })
   }
 
