@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { StarshipDetail, StarwarsService } from '../starwars.service';
+import { StarshipDetail, StarwarsService, Character, Film } from '../starwars.service';
 
 @Component({
   selector: 'app-starship-detail',
@@ -12,7 +12,8 @@ import { StarshipDetail, StarwarsService } from '../starwars.service';
 export class StarshipDetailComponent implements OnInit {
 
   starshipDetail: StarshipDetail;
-  //@Input() character: Character;
+  films: Film[] = [];
+  characters: Character[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,15 +22,28 @@ export class StarshipDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //var name = this.route.snapshot.params.name;
-    //var url = this.starwarsService.getCharacterList.findbyName(name).url;
     this.starwarsService.getStarshipDetails(this.route.snapshot.params.name)
       .then(result => {
         this.starshipDetail = result;
         console.info('starshipDetail: ', result)
+
+        for (var i = 0, len = result.films.length; i < len; i++) {
+          this.starwarsService.getFilmByUrl(result.films[i])
+            .then(result => {
+              this.films.push(result);
+            })
+        }
+
+        for (var i = 0, len = result.characters.length; i < len; i++) {
+          this.starwarsService.getCharacterByUrl(result.characters[i])
+            .then(result => {
+              this.characters.push(result);
+            })
+        }
+        console.info('cha: ', this.characters)
       })
   }
-  
+
   back() {
     //this.router.navigate(['/']);
     this.location.back();

@@ -19,8 +19,12 @@
       <p>MGLT: {{ starshipDetail?.MGLT }}</p>
       <p>Cargo Capacity: {{ starshipDetail?.cargo_capacity }}</p>
       <p>Consumables: {{ starshipDetail?.consumables }}</p>
-      <p>Films: {{ starshipDetail?.films }}</p>
-      <p>Pilots: {{ starshipDetail?.pilots }}</p>
+      <p>Films: <a *ngFor="let film of films" routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
+      <p>Pilots: </p>
+      <div *ngIf="characters == [], else NA">
+        <a *ngFor="let character of characters"
+          routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a>
+      </div>
 
     </mat-card-content>
   </mat-card>
@@ -32,4 +36,7 @@
     </button>
   </mat-card-actions>
 
+  <ng-template #NA>
+    <p>N.A.</p>
+  </ng-template>
 </main>

@@ -70,6 +70,8 @@ export interface Starship{
 export interface StarshipDetail{
     url: string;
     name: string;
+    films: string[];
+    characters: string[];
 }
 
 export interface StarshipPage {
@@ -386,7 +388,7 @@ export class StarwarsService {
                             cargo_capacity: v.cargo_capacity,
                             consumables: v.consumables,
                             films: v.films,
-                            pilots: v.pilots,
+                            characters: v.pilots,
                             url: v.url,
                             image: imageurl,                         
                         })
