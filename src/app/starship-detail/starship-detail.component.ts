@@ -17,6 +17,7 @@ export class StarshipDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private starwarsService: StarwarsService,
     private location: Location
   ) { }
@@ -45,8 +46,7 @@ export class StarshipDetailComponent implements OnInit {
       })
   }
 
-  back() {
-    //this.router.navigate(['/']);
+  goBack() {
     this.location.back();
   }
 }

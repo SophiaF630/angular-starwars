@@ -24,6 +24,8 @@ import { PlanetDetailComponent } from './planet-detail/planet-detail.component';
 import { PlanetsComponent } from './planets/planets.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const ROUTES: Route[] = [
   { path: 'home', component: HomeComponent}
@@ -49,10 +51,13 @@ const ROUTES: Route[] = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    MaterialModule,
+    MatInputModule,
+    MaterialModule, 
+    MatFormFieldModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [StarwarsService],

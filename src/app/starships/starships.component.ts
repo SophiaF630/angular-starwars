@@ -46,6 +46,8 @@ export class StarshipsComponent implements OnInit {
   
     goBack(): void {
       this.location.back();
+      //this.router.navigate(['/'],{replaceUrl:true})
+      //this.ngOnInit();
     }
 
     previous(): void {
