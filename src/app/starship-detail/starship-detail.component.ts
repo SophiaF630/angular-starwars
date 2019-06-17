@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { LocalStorageService } from '../localStorage.service';
 import { StarshipDetail, StarwarsService, Character, Film } from '../starwars.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { StarshipDetail, StarwarsService, Character, Film } from '../starwars.se
   templateUrl: './starship-detail.component.html',
   styleUrls: ['./starship-detail.component.css']
 })
+
 export class StarshipDetailComponent implements OnInit {
 
   starshipDetail: StarshipDetail;
@@ -19,7 +20,9 @@ export class StarshipDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private starwarsService: StarwarsService,
-    private location: Location
+    private location: Location,
+    private localStorageService: LocalStorageService
+    
   ) { }
 
   ngOnInit() {
@@ -42,7 +45,11 @@ export class StarshipDetailComponent implements OnInit {
               this.characters.push(result);
             })
         }
-       // console.log('film: ', this.films)
+
+        const url = "url"
+        const comments = "new";
+        this.localStorageService.storeOnLocalStorage(url, comments);
+
       })
   }
 

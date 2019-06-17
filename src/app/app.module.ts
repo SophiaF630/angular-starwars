@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { StorageServiceModule } from 'ngx-webstorage-service';
 
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocalStorageService } from './localStorage.service';
+
 
 const ROUTES: Route[] = [
   { path: 'home', component: HomeComponent}
@@ -59,8 +62,9 @@ const ROUTES: Route[] = [
     MaterialModule, 
     MatFormFieldModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    StorageServiceModule
   ],
-  providers: [StarwarsService],
+  providers: [StarwarsService, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
