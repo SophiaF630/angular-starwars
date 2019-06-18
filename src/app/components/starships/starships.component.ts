@@ -1,8 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Starship, StarshipPage, StarwarsService } from 'src/app/services/starwars.service';
 
-import { Starship, StarshipPage, StarwarsService } from '../starwars.service';
 
 @Component({
   selector: 'app-starships',

@@ -1,8 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { LocalStorageService } from '../localStorage.service';
-import { StarshipDetail, StarwarsService, Character, Film } from '../starwars.service';
+import { Comment } from 'src/app/classes/comment';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
+import { Character, Film, StarshipDetail, StarwarsService } from 'src/app/services/starwars.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-starship-detail',
@@ -11,6 +13,9 @@ import { StarshipDetail, StarwarsService, Character, Film } from '../starwars.se
 })
 
 export class StarshipDetailComponent implements OnInit {
+
+  @Input()
+  private comment: Comment;
 
   starshipDetail: StarshipDetail;
   films: Film[] = [];
@@ -44,14 +49,22 @@ export class StarshipDetailComponent implements OnInit {
             .then(result => {
               this.characters.push(result);
             })
-        }
-
-        const url = "url"
-        const comments = "new";
-        this.localStorageService.storeOnLocalStorage(url, comments);
-
+        }       
       })
   }
+
+  // addComments(form: NgForm){
+  //   const comments=form.value.comments;
+  //   const url = this.starshipDetail.url;
+  //   this.localStorageService.storeOnLocalStorage(url, comments);
+  // }
+
+
+  addComments(form:NgForm): void{
+    console.log(this.starshipDetail.url, form.value.comments);
+    this.localStorageService.addComments(this.starshipDetail.url, form.value.comments);
+  }
+  
 
   goBack() {
     this.location.back();

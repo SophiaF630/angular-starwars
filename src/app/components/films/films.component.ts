@@ -1,8 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-
-import { Film, StarwarsService } from '../starwars.service';
+import { Film, StarwarsService } from 'src/app/services/starwars.service';
 
 @Component({
   selector: 'app-films',

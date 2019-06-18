@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Character, Film, Planet, SpeciesDetail, StarwarsService } from 'src/app/services/starwars.service';
 
-import { SpeciesDetail, StarwarsService, Character, Planet, Film } from '../starwars.service';
 
 @Component({
   selector: 'app-species-detail',

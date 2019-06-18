@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { CharacterDetail, Species, StarwarsService, Starship, Planet, Film, Vehicle } from '../starwars.service';
+import { CharacterDetail, Species, StarwarsService, Starship, Planet, Film, Vehicle } from 'src/app/services/starwars.service';
 
 @Component({
   selector: 'app-character-detail',

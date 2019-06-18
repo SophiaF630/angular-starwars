@@ -1,18 +1,19 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Species, SpeciesPage, StarwarsService } from 'src/app/services/starwars.service';
 
-import { Vehicle, VehiclePage, StarwarsService } from '../starwars.service';
 
 @Component({
-  selector: 'app-vehicles',
-  templateUrl: './vehicles.component.html',
-  styleUrls: ['./vehicles.component.css']
+  selector: 'app-species',
+  templateUrl: './species.component.html',
+  styleUrls: ['./species.component.css']
 })
-export class VehiclesComponent implements OnInit {
+export class SpeciesComponent implements OnInit {
 
-  vehicleList: Vehicle[] = [];
-  vehiclePage: VehiclePage;
+  speciesList: Species[] = [];
+  //selectedCharacter: Character;
+  speciesPage: SpeciesPage;
   page: number;
 
   constructor(
@@ -24,20 +25,20 @@ export class VehiclesComponent implements OnInit {
     ngOnInit() {
       this.page = this.route.snapshot.params.page;
 
-      this.starwarsService.getVehicleList(this.page)
+      this.starwarsService.getSpeciesList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.vehicleList = result
+          this.speciesList = result
         }
         )
         .catch(error => {
           console.error('error: ', error);
         });   
-
-        this.starwarsService.getVehiclePreNextPage(this.page)
+  
+        this.starwarsService.getSpeciesPreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.vehiclePage = result
+          this.speciesPage = result
         })
         .catch(error => {
           console.error('error: ', error);
@@ -53,49 +54,48 @@ export class VehiclesComponent implements OnInit {
         this.page = this.page * 1 - 1;
       }
   
-      this.starwarsService.getVehicleList(this.page)
+      this.starwarsService.getSpeciesList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.vehicleList = result
+          this.speciesList = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-        this.starwarsService.getVehiclePreNextPage(this.page)
+        this.starwarsService.getSpeciesPreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.vehiclePage = result
+          this.speciesPage = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.router.navigateByUrl(`/vehicles/page/${this.page}`);
+      this.router.navigateByUrl(`/species/page/${this.page}`);
     }
   
     next(): void {
   
       this.page = this.page * 1 + 1;
-      this.starwarsService.getVehicleList(this.page)
+      this.starwarsService.getSpeciesList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.vehicleList = result
+          this.speciesList = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.starwarsService.getVehiclePreNextPage(this.page)
+      this.starwarsService.getSpeciesPreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.vehiclePage = result
+          this.speciesPage = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.router.navigateByUrl(`/vehicles/page/${this.page}`);
+      this.router.navigateByUrl(`/species/page/${this.page}`);
     }
-  
 }

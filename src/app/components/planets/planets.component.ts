@@ -1,19 +1,19 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Planet, PlanetPage, StarwarsService } from 'src/app/services/starwars.service';
 
-import { Species, SpeciesPage, StarwarsService } from '../starwars.service';
 
 @Component({
-  selector: 'app-species',
-  templateUrl: './species.component.html',
-  styleUrls: ['./species.component.css']
+  selector: 'app-planets',
+  templateUrl: './planets.component.html',
+  styleUrls: ['./planets.component.css']
 })
-export class SpeciesComponent implements OnInit {
+export class PlanetsComponent implements OnInit {
 
-  speciesList: Species[] = [];
+  planetList: Planet[] = [];
   //selectedCharacter: Character;
-  speciesPage: SpeciesPage;
+  planetPage: PlanetPage;
   page: number;
 
   constructor(
@@ -25,10 +25,10 @@ export class SpeciesComponent implements OnInit {
     ngOnInit() {
       this.page = this.route.snapshot.params.page;
 
-      this.starwarsService.getSpeciesList(this.page)
+      this.starwarsService.getPlanetList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.speciesList = result
+          this.planetList = result
         }
         )
         .catch(error => {
@@ -38,7 +38,7 @@ export class SpeciesComponent implements OnInit {
         this.starwarsService.getSpeciesPreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.speciesPage = result
+          this.planetPage = result
         })
         .catch(error => {
           console.error('error: ', error);
@@ -54,48 +54,49 @@ export class SpeciesComponent implements OnInit {
         this.page = this.page * 1 - 1;
       }
   
-      this.starwarsService.getSpeciesList(this.page)
+      this.starwarsService.getPlanetList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.speciesList = result
+          this.planetList = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-        this.starwarsService.getSpeciesPreNextPage(this.page)
+        this.starwarsService.getPlanetPreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.speciesPage = result
+          this.planetPage = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.router.navigateByUrl(`/species/page/${this.page}`);
+      this.router.navigateByUrl(`/planets/page/${this.page}`);
     }
   
     next(): void {
   
       this.page = this.page * 1 + 1;
-      this.starwarsService.getSpeciesList(this.page)
+      this.starwarsService.getPlanetList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.speciesList = result
+          this.planetList = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.starwarsService.getSpeciesPreNextPage(this.page)
+      this.starwarsService.getPlanetPreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.speciesPage = result
+          this.planetPage = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.router.navigateByUrl(`/species/page/${this.page}`);
+      this.router.navigateByUrl(`/planets/page/${this.page}`);
     }
+
 }

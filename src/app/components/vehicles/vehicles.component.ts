@@ -1,19 +1,18 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { StarwarsService, Vehicle, VehiclePage } from 'src/app/services/starwars.service';
 
-import { Planet, PlanetPage, StarwarsService } from '../starwars.service';
 
 @Component({
-  selector: 'app-planets',
-  templateUrl: './planets.component.html',
-  styleUrls: ['./planets.component.css']
+  selector: 'app-vehicles',
+  templateUrl: './vehicles.component.html',
+  styleUrls: ['./vehicles.component.css']
 })
-export class PlanetsComponent implements OnInit {
+export class VehiclesComponent implements OnInit {
 
-  planetList: Planet[] = [];
-  //selectedCharacter: Character;
-  planetPage: PlanetPage;
+  vehicleList: Vehicle[] = [];
+  vehiclePage: VehiclePage;
   page: number;
 
   constructor(
@@ -25,20 +24,20 @@ export class PlanetsComponent implements OnInit {
     ngOnInit() {
       this.page = this.route.snapshot.params.page;
 
-      this.starwarsService.getPlanetList(this.page)
+      this.starwarsService.getVehicleList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.planetList = result
+          this.vehicleList = result
         }
         )
         .catch(error => {
           console.error('error: ', error);
         });   
-  
-        this.starwarsService.getSpeciesPreNextPage(this.page)
+
+        this.starwarsService.getVehiclePreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.planetPage = result
+          this.vehiclePage = result
         })
         .catch(error => {
           console.error('error: ', error);
@@ -54,49 +53,49 @@ export class PlanetsComponent implements OnInit {
         this.page = this.page * 1 - 1;
       }
   
-      this.starwarsService.getPlanetList(this.page)
+      this.starwarsService.getVehicleList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.planetList = result
+          this.vehicleList = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-        this.starwarsService.getPlanetPreNextPage(this.page)
+        this.starwarsService.getVehiclePreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.planetPage = result
+          this.vehiclePage = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.router.navigateByUrl(`/planets/page/${this.page}`);
+      this.router.navigateByUrl(`/vehicles/page/${this.page}`);
     }
   
     next(): void {
   
       this.page = this.page * 1 + 1;
-      this.starwarsService.getPlanetList(this.page)
+      this.starwarsService.getVehicleList(this.page)
         .then(result => {
           console.log('result:', result);
-          this.planetList = result
+          this.vehicleList = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.starwarsService.getPlanetPreNextPage(this.page)
+      this.starwarsService.getVehiclePreNextPage(this.page)
         .then(result => {
           console.log('result:', result);
-          this.planetPage = result
+          this.vehiclePage = result
         })
         .catch(error => {
           console.error('error: ', error);
         })
   
-      this.router.navigateByUrl(`/planets/page/${this.page}`);
+      this.router.navigateByUrl(`/vehicles/page/${this.page}`);
     }
-
+  
 }

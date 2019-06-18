@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { HomeComponent } from './home/home.component';
-import { CharactersComponent } from './characters/characters.component';
-import { CharacterDetailComponent } from './character-detail/character-detail.component';
-import { FilmsComponent } from './films/films.component';
-import { FilmDetailComponent } from './film-detail/film-detail.component';
-import { SpeciesComponent } from './species/species.component';
-import { SpeciesDetailComponent } from './species-detail/species-detail.component';
-import { StarshipsComponent } from './starships/starships.component';
-import { StarshipDetailComponent } from './starship-detail/starship-detail.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
-import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
-import { PlanetsComponent } from './planets/planets.component';
-import { PlanetDetailComponent } from './planet-detail/planet-detail.component';
+import { HomeComponent } from './components/home/home.component';
+import { CharactersComponent } from './components/characters/characters.component';
+import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
+import { FilmsComponent } from './components/films/films.component';
+import { FilmDetailComponent } from './components/film-detail/film-detail.component';
+import { SpeciesComponent } from './components/species/species.component';
+import { SpeciesDetailComponent } from './components/species-detail/species-detail.component';
+import { StarshipsComponent } from './components/starships/starships.component';
+import { StarshipDetailComponent } from './components/starship-detail/starship-detail.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component';
+import { VehicleDetailComponent } from './components/vehicle-detail/vehicle-detail.component';
+import { PlanetsComponent } from './components/planets/planets.component';
+import { PlanetDetailComponent } from './components/planet-detail/planet-detail.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [

@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 
-import { Character, CharacterPage, StarwarsService } from '../starwars.service';
-
+import { Character, CharacterPage, StarwarsService } from 'src/app/services/starwars.service';
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
