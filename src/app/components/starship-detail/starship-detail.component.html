@@ -33,15 +33,16 @@
   </mat-card>
   <mat-card>
     <mat-card-subtitle>
-      Comments {{changeCount}}
+      Comments
     </mat-card-subtitle>
     <mat-card-content>
-      <form #form='ngForm' class="example-form">
-        <mat-form-field class="example-full-width">
-          <textarea (change)="addComments(form)" name="comments" ngModel matInput rows="4">{{comments}}</textarea>
+      <form #form='ngForm' class="form-form">
+        <mat-form-field class="form-full-width">
+          <!-- <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)] = "comments"></textarea> -->
+          <textarea (change)="addComments(form)" name="comments" matInput rows="4" ngModel></textarea>
         </mat-form-field>
       </form>
-      <p>{{comments}}</p>    
+    <p>{{comments}}</p>    
     </mat-card-content>
   </mat-card>
 
