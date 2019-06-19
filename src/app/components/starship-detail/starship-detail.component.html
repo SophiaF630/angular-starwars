@@ -36,13 +36,21 @@
       Comments
     </mat-card-subtitle>
     <mat-card-content>
-      <form #form='ngForm' class="form-form">
-        <mat-form-field class="form-full-width">
-          <!-- <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)] = "comments"></textarea> -->
-          <textarea (change)="addComments(form)" name="comments" matInput rows="4" ngModel></textarea>
-        </mat-form-field>
-      </form>
-    <p>{{comments}}</p>    
+      <div *ngIf="comments.length != 0" >
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea>
+            <!-- <textarea *ngIf="comments.length == 0" (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea> -->
+          </mat-form-field>
+        </form>
+      </div>
+      <div *ngIf="comments.length == 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" ngModel></textarea>
+          </mat-form-field>
+        </form>
+      </div>
     </mat-card-content>
   </mat-card>
 

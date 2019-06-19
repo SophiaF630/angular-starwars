@@ -54,8 +54,8 @@ export class StarshipDetailComponent implements OnInit {
 
   }
 
-  get comments():void{
-    return this.localStorageService.getLocalStorage(this.starshipDetail.url);
+  get comments():any{
+    return this.localStorageService.getLocalStorage(this.starshipDetail.url) || [];
   }
 
   addComments(form:NgForm): void{
