@@ -1,10 +1,8 @@
 export class Comment{
-    id: number;
     url: string;
     content: string;
 
-    constructor(id: number, url: string, content: string){
-        this.id = id;
+    constructor(url: string, content: string){
         this.url = url;
         this.content = content;
     }

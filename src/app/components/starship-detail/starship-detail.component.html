@@ -38,9 +38,10 @@
     <mat-card-content>
       <form #form='ngForm' class="example-form">
         <mat-form-field class="example-full-width">
-          <textarea (change)="addComments(form)" name="comments" ngModel matInput rows="4"></textarea>
+          <textarea (change)="addComments(form)" name="comments" ngModel matInput rows="4">{{comments}}</textarea>
         </mat-form-field>
       </form>
+      <p>{{comments}}</p>    
     </mat-card-content>
   </mat-card>
 
