@@ -2,7 +2,9 @@
   <mat-card (swiperight)="goBack()">
     <mat-card-header>
       <mat-card-title><strong>{{ starshipDetail?.name }}</strong></mat-card-title>
+      <button (click) = "share">Share Me</button>
     </mat-card-header>
+    
     <img mat-card-image [src]="starshipDetail?.image">
     <mat-card-content>
       <p><strong>Model:</strong> {{ starshipDetail?.model }}</p>
