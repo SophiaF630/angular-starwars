@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { CharacterDetail, Species, StarwarsService, Starship, Planet, Film, Vehicle } from 'src/app/services/starwars.service';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-character-detail',
@@ -25,7 +27,8 @@ export class CharacterDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private starwarsService: StarwarsService,
-    private location: Location
+    private location: Location,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
@@ -75,6 +78,16 @@ export class CharacterDetailComponent implements OnInit {
   back() {
     //this.router.navigate(['/']);
     this.location.back();
+  }
+
+  get comments():any{
+    return this.localStorageService.getLocalStorage(this.characterDetail.url) || [];
+  }
+
+  addComments(form:NgForm): void{
+    const comments=form.value.comments;
+    const url = this.characterDetail.url;
+    this.localStorageService.storeOnLocalStorage(url, comments);
   }
 
 }

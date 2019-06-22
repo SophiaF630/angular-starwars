@@ -1,30 +1,77 @@
 <main *ngIf="filmDetail">
 
   <mat-card (swiperight)="back()">
-      <mat-card-header>
-        <mat-card-title>{{ filmDetail?.name }}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image [src]="filmDetail?.image">
-      <mat-card-content>
-        <p>Title: {{ filmDetail?.title }}</p>
-        <p>Episode: {{ filmDetail?.episode_id }}</p>
-        <p>Opening Crawl: {{ filmDetail?.opening_crawl }}</p>
-        <p>Director: {{ filmDetail?.director }}</p>
-        <p>Producer: {{ filmDetail?.producer }}</p>
-        <p>Release Date: {{ filmDetail?.release_date }}</p>
-        <p>Species: <a *ngFor="let species1 of species" routerLink="/speciesdetail/{{species1?.name}}">{{species1?.name}}</a></p>
-        <p>Starships: <a *ngFor="let starship of starships" routerLink="/starshipdetail/{{starship?.name}}">{{starship?.name}}</a></p>
-        <p>Vehicles: <a *ngFor="let vehicle of vehicles" routerLink="/vehicledetail/{{vehicle?.name}}">{{vehicle?.name}}</a></p>
-        <p>Characters: <a *ngFor="let character of characters" routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
-        <p>Planets: <a *ngFor="let planet of planets" routerLink="/planetdetail/{{planet?.name}}">{{planet?.name}}</a></p>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card-actions fxLayoutAlign="end">
-      <button mat-raised-button a routerLink="/home" >
-        <!-- <mat-icon>arrow_back</mat-icon> -->
-        Back
-      </button>
-    </mat-card-actions>
-
+    <mat-card-header>
+      <mat-card-title>{{ filmDetail?.name }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="filmDetail?.image">
+    <mat-card-content>
+      <p>Title: {{ filmDetail?.title }}</p>
+      <p>Episode: {{ filmDetail?.episode_id }}</p>
+      <p>Opening Crawl: {{ filmDetail?.opening_crawl }}</p>
+      <p>Director: {{ filmDetail?.director }}</p>
+      <p>Producer: {{ filmDetail?.producer }}</p>
+      <p>Release Date: {{ filmDetail?.release_date }}</p>
+      <p><strong>Species: </strong></p>
+      <div *ngIf="species.length != 0, else NA">
+        <div *ngFor="let species1 of species">
+          <p class="para"><a routerLink="/speciesdetail/{{species1?.name}}">{{species1?.name}}</a></p>
+        </div>
+      </div>
+      <p><strong>Starships: </strong></p>
+      <div *ngIf="starships.length != 0, else NA">
+        <div *ngFor="let starship of starships">
+          <p class="para"><a routerLink="/starshipdetail/{{starship?.name}}">{{starship?.name}}</a></p>
+        </div>
+      </div>
+      <p><strong>Vehicles: </strong></p>
+      <div *ngIf="vehicles.length != 0, else NA">
+        <div *ngFor="let vehicle of vehicles">
+          <p class="para"><a routerLink="/vehicledetail/{{vehicle?.name}}">{{vehicle?.name}}</a></p>
+        </div>
+      </div>
+      <p><strong>Characters: </strong></p>
+      <div *ngIf="characters.length != 0, else NA">
+        <div *ngFor="let character of characters">
+          <p class="para"><a routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
+        </div>
+      </div>
+      <p><strong>Planets: </strong></p>
+      <div *ngIf="planets.length != 0, else NA">
+        <div *ngFor="let planet of planets">
+          <p class="para"><a routerLink="/planetdetail/{{planet?.name}}">{{planet?.name}}</a></p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-subtitle>
+      Comments
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div *ngIf="comments.length != 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+      <div *ngIf="comments.length == 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" ngModel></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card-actions fxLayoutAlign="end">
+    <button mat-raised-button a routerLink="/home">
+      <!-- <mat-icon>arrow_back</mat-icon> -->
+      Back
+    </button>
+  </mat-card-actions>
+  <ng-template #NA>
+    <p>There is no related item.</p>
+  </ng-template>
 </main>

@@ -89,6 +89,8 @@ export interface Vehicle{
 export interface VehicleDetail{
     url: string;
     name: string;
+    films: string[];
+    characters: string[];
 }
 
 export interface VehiclePage {
@@ -106,6 +108,8 @@ export interface Planet{
 export interface PlanetDetail{
     url: string;
     name: string;
+    films: string[];
+    characters: string[];
 }
 
 export interface PlanetPage {
@@ -464,7 +468,7 @@ export class StarwarsService {
                             cargo_capacity: v.cargo_capacity,
                             consumables: v.consumables,
                             films: v.films,
-                            pilots: v.pilots,
+                            characters: v.pilots,
                             url: v.url,
                             image: imageurl,                           
                         })
@@ -537,7 +541,7 @@ export class StarwarsService {
                             climate: v.climate,
                             terrain: v.terrain,
                             surface_water: v.surface_water,
-                            residents: v.residents,
+                            characters: v.residents,
                             films: v.films,
                             url: v.url,
                             image: imageurl,                           

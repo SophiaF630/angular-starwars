@@ -6,18 +6,48 @@
     </mat-card-header>
     <img mat-card-image [src]="planetDetail?.image">
     <mat-card-content>
-      <p>Name: {{ planetDetail?.name }}</p>
-      <p>Diameter: {{ planetDetail?.diameter }}</p>
-      <p>Rotation Period: {{ planetDetail?.rotation_period }}</p>
-      <p>Orbital Period: {{ planetDetail?.orbital_period }}</p>
-      <p>Gravity: {{ planetDetail?.gravity }}</p>
-      <p>Population: {{ planetDetail?.population }}</p>
-      <p>Climate: {{ planetDetail?.climate }}</p>
-      <p>Terrain: {{ planetDetail?.terrain }}</p>
-      <p>Surface Water: {{ planetDetail?.surface_water }}</p>
-      <p>Residents: {{ planetDetail?.residents }}</p>
-      <p>Films: {{ planetDetail?.films }}</p>
-
+      <p><strong>Name: </strong> {{ planetDetail?.name }}</p>
+      <p><strong>Diameter: </strong>{{ planetDetail?.diameter }}</p>
+      <p><strong>Rotation Period: </strong>{{ planetDetail?.rotation_period }}</p>
+      <p><strong>Orbital Period: </strong>{{ planetDetail?.orbital_period }}</p>
+      <p><strong>Gravity: </strong>{{ planetDetail?.gravity }}</p>
+      <p><strong>Population: </strong>{{ planetDetail?.population }}</p>
+      <p><strong>Climate: </strong>{{ planetDetail?.climate }}</p>
+      <p><strong>Terrain: </strong>{{ planetDetail?.terrain }}</p>
+      <p><strong>Surface Water: </strong>{{ planetDetail?.surface_water }}</p>
+      <p><strong>Residents: </strong>
+        <div *ngIf="characters.length != 0, else NA">
+        <div *ngFor="let character of characters">
+          <p class="para"><a routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
+        </div>
+      </div>
+      <p><strong>Films: </strong></p>
+      <div *ngIf="films.length != 0, else NA">
+        <div *ngFor="let film of films">
+          <p class="para"><a routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-subtitle>
+      Comments
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div *ngIf="comments.length != 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+      <div *ngIf="comments.length == 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" ngModel></textarea>
+          </mat-form-field>
+        </form>
+      </div>
     </mat-card-content>
   </mat-card>
 
@@ -27,5 +57,7 @@
       Back
     </button>
   </mat-card-actions>
-
+  <ng-template #NA>
+    <p>There is no related item.</p>
+  </ng-template>
 </main>

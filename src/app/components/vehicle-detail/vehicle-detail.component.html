@@ -6,23 +6,56 @@
     </mat-card-header>
     <img mat-card-image [src]="vehicleDetail?.image">
     <mat-card-content>
-      <p>Name: {{ vehicleDetail?.name }}</p>
-      <p>Model: {{ vehicleDetail?.model }}</p>
-      <p>Vehicle Class: {{ vehicleDetail?.vehicle_class }}</p>
-      <p>Manufacturer: {{ vehicleDetail?.manufacturer }}</p>
-      <p>Cost in credits: {{ vehicleDetail?.cost_in_credits }}</p>
-      <p>Length: {{ vehicleDetail?.length }}</p>
-      <p>Crew: {{ vehicleDetail?.crew }}</p>
-      <p>Passengers: {{ vehicleDetail?.passengers }}</p>
-      <p>Max Atmosphering Speed: {{ vehicleDetail?.max_atmosphering_speed }}</p>
-      <p>Cargo Capacity: {{ vehicleDetail?.cargo_capacity }}</p>
-      <p>Consumables: {{ vehicleDetail?.consumables }}</p>
-      <p>Films: {{ vehicleDetail?.films }}</p>
-      <p>Pilots: {{ vehicleDetail?.pilots }}</p>
-
+      <p><strong>Name: </strong>{{ vehicleDetail?.name }}</p>
+      <p><strong>Model: </strong>{{ vehicleDetail?.model }}</p>
+      <p><strong>Vehicle Class: </strong>{{ vehicleDetail?.vehicle_class }}</p>
+      <p><strong>Manufacturer: </strong>{{ vehicleDetail?.manufacturer }}</p>
+      <p><strong>Cost in credits: </strong>{{ vehicleDetail?.cost_in_credits }}</p>
+      <p><strong>Length: </strong>{{ vehicleDetail?.length }}</p>
+      <p><strong>Crew: </strong>{{ vehicleDetail?.crew }}</p>
+      <p><strong>Passengers: </strong>{{ vehicleDetail?.passengers }}</p>
+      <p><strong>Max Atmosphering Speed: </strong>{{ vehicleDetail?.max_atmosphering_speed }}</p>
+      <p><strong>Cargo Capacity: </strong>{{ vehicleDetail?.cargo_capacity }}</p>
+      <p><strong>Consumables: </strong>{{ vehicleDetail?.consumables }}</p>
+      <p><strong>Films: </strong></p>
+      <div *ngIf="films.length != 0, else NA">
+        <div *ngFor="let film of films">
+          <p class="para"><a routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
+        </div>
+      </div>
+      <p><strong>Piolts: </strong></p>
+      <div *ngIf="characters.length != 0, else NA">
+        <div *ngFor="let character of characters">
+          <p class="para"><a routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-subtitle>
+      Comments
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div *ngIf="comments.length != 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+      <div *ngIf="comments.length == 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" ngModel></textarea>
+          </mat-form-field>
+        </form>
+      </div>
     </mat-card-content>
   </mat-card>
 
+  <ng-template #NA>
+    <p>There is no related item.</p>
+  </ng-template>
   <mat-card-actions fxLayoutAlign="end">
     <button mat-raised-button a routerLink="/home">
       <!-- <mat-icon>arrow_back</mat-icon> -->

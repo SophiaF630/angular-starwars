@@ -2,9 +2,9 @@
   <mat-card (swiperight)="goBack()">
     <mat-card-header>
       <mat-card-title><strong>{{ starshipDetail?.name }}</strong></mat-card-title>
-      <button (click) = "share">Share Me</button>
+      <button (click)="share">Share Me</button>
     </mat-card-header>
-    
+
     <img mat-card-image [src]="starshipDetail?.image">
     <mat-card-content>
       <p><strong>Model:</strong> {{ starshipDetail?.model }}</p>
@@ -27,8 +27,9 @@
       </div>
       <p><strong>Piolts: </strong></p>
       <div *ngIf="characters.length != 0, else NA">
-        <a *ngFor="let character of characters"
-          routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a>
+        <div *ngFor="let character of characters">
+          <p class="para"><a routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
+        </div>
       </div>
 
     </mat-card-content>
@@ -38,11 +39,10 @@
       Comments
     </mat-card-subtitle>
     <mat-card-content>
-      <div *ngIf="comments.length != 0" >
+      <div *ngIf="comments.length != 0">
         <form #form='ngForm' class="form-form">
           <mat-form-field class="form-full-width">
             <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea>
-            <!-- <textarea *ngIf="comments.length == 0" (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea> -->
           </mat-form-field>
         </form>
       </div>

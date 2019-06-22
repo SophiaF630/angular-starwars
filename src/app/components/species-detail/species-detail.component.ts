@@ -2,6 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Character, Film, Planet, SpeciesDetail, StarwarsService } from 'src/app/services/starwars.service';
+import { NgForm } from '@angular/forms';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class SpeciesDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private starwarsService: StarwarsService,
-    private location: Location
+    private location: Location,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
@@ -53,5 +56,13 @@ export class SpeciesDetailComponent implements OnInit {
     //this.router.navigate(['/']);
     this.location.back();
   }
+  get comments():any{
+    return this.localStorageService.getLocalStorage(this.speciesDetail.url) || [];
+  }
 
+  addComments(form:NgForm): void{
+    const comments=form.value.comments;
+    const url = this.speciesDetail.url;
+    this.localStorageService.storeOnLocalStorage(url, comments);
+  }
 }

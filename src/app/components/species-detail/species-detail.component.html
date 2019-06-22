@@ -6,26 +6,58 @@
     </mat-card-header>
     <img mat-card-image [src]="speciesDetail?.image">
     <mat-card-content>
-      <p>Name: {{ speciesDetail?.name }}</p>
-      <p>Classification: {{ speciesDetail?.classification }}</p>
-      <p>Designation: {{ speciesDetail?.designation }}</p>
-      <p>Average Height: {{ speciesDetail?.average_height }}</p>
-      <p>Average Lifespan: {{ speciesDetail?.average_lifespan }}</p>
-      <p>Eye Colors: {{ speciesDetail?.eye_colors }}</p>
-      <p>Hair Colors: {{ speciesDetail?.hair_colors }}</p>
-      <p>Skin Colors: {{ speciesDetail?.skin_colors }}</p>
-      <p>Language: {{ speciesDetail?.language }}</p>
-      <p>Homeworld: <a routerLink="/planetdetail/{{planet?.name}}">{{planet?.name}}</a></p>
-      <p>Characters: <a *ngFor="let character of characters" routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
-      <p>Films: <a *ngFor="let film of films" routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
+      <p><strong>Name: </strong>{{ speciesDetail?.name }}</p>
+      <p><strong>Classification: </strong>{{ speciesDetail?.classification }}</p>
+      <p><strong>Designation: </strong>{{ speciesDetail?.designation }}</p>
+      <p><strong>Average Height: </strong>{{ speciesDetail?.average_height }}</p>
+      <p><strong>Average Lifespan: </strong>{{ speciesDetail?.average_lifespan }}</p>
+      <p><strong>Eye Colors: </strong>{{ speciesDetail?.eye_colors }}</p>
+      <p><strong>Hair Colors: </strong>{{ speciesDetail?.hair_colors }}</p>
+      <p><strong>Skin Colors: </strong>{{ speciesDetail?.skin_colors }}</p>
+      <p><strong>Language: </strong>{{ speciesDetail?.language }}</p>
+      <p><strong>Homeworld: </strong><a routerLink="/planetdetail/{{planet?.name}}">{{planet?.name}}</a></p>
+      <p><strong>Characters: </strong></p>
+      <div *ngIf="characters.length != 0, else NA">
+        <div *ngFor="let character of characters">
+          <p class="para"><a routerLink="/characterdetail/{{character?.name}}">{{character?.name}}</a></p>
+        </div>
+      </div>
+      <p><strong>Films: </strong></p>
+      <div *ngIf="films.length != 0, else NA">
+        <div *ngFor="let film of films">
+          <p class="para"><a routerLink="/filmdetail/{{film?.title}}">{{film?.title}}</a></p>
+        </div>
+      </div>
     </mat-card-content>
   </mat-card>
-
+  <mat-card>
+    <mat-card-subtitle>
+      Comments
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div *ngIf="comments.length != 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" [(ngModel)]="comments"></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+      <div *ngIf="comments.length == 0">
+        <form #form='ngForm' class="form-form">
+          <mat-form-field class="form-full-width">
+            <textarea (change)="addComments(form)" name="comments" matInput rows="4" ngModel></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
   <mat-card-actions fxLayoutAlign="end">
     <button mat-raised-button a routerLink="/home">
       <!-- <mat-icon>arrow_back</mat-icon> -->
       Back
     </button>
   </mat-card-actions>
-
+  <ng-template #NA>
+    <p>There is no related item.</p>
+  </ng-template>
 </main>

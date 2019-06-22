@@ -5,7 +5,7 @@ import { Comment } from 'src/app/classes/comment';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { Character, Film, StarshipDetail, StarwarsService } from 'src/app/services/starwars.service';
 import { NgForm } from '@angular/forms';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+
 
 @Component({
   selector: 'app-starship-detail',
@@ -21,7 +21,6 @@ export class StarshipDetailComponent implements OnInit {
   comment: Comment;
 
   constructor(
-    @Inject(LOCAL_STORAGE) private storage: StorageService,
     private route: ActivatedRoute,
     private router: Router,
     private starwarsService: StarwarsService,
@@ -62,7 +61,6 @@ export class StarshipDetailComponent implements OnInit {
     const comments=form.value.comments;
     const url = this.starshipDetail.url;
     this.localStorageService.storeOnLocalStorage(url, comments);
-    //this.localStorageService.addComments(url, comments);
   }
   
 

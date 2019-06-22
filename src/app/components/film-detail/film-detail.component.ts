@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { FilmDetail, StarwarsService, Character, Species, Starship, Planet, Vehicle } from 'src/app/services/starwars.service';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -20,7 +22,8 @@ export class FilmDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private starwarsService: StarwarsService,
-    private location: Location
+    private location: Location,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
@@ -71,6 +74,16 @@ export class FilmDetailComponent implements OnInit {
   back() {
     //this.router.navigate(['/']);
     this.location.back();
+  }
+
+  get comments():any{
+    return this.localStorageService.getLocalStorage(this.filmDetail.url) || [];
+  }
+
+  addComments(form:NgForm): void{
+    const comments=form.value.comments;
+    const url = this.filmDetail.url;
+    this.localStorageService.storeOnLocalStorage(url, comments);
   }
 
 

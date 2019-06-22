@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PlanetDetail, StarwarsService } from 'src/app/services/starwars.service';
+import { PlanetDetail, StarwarsService, Character, Film } from 'src/app/services/starwars.service';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -12,27 +14,54 @@ import { PlanetDetail, StarwarsService } from 'src/app/services/starwars.service
 export class PlanetDetailComponent implements OnInit {
 
   planetDetail: PlanetDetail;
-  //@Input() character: Character;
+  characters: Character[] = [];
+  films: Film[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private starwarsService: StarwarsService,
-    private location: Location
+    private location: Location,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
-    //var name = this.route.snapshot.params.name;
-    //var url = this.starwarsService.getCharacterList.findbyName(name).url;
     this.starwarsService.getPlanetDetails(this.route.snapshot.params.name)
       .then(result => {
         this.planetDetail = result;
         console.info('planetDetail: ', result)
+
+        for (var i = 0, len = result.films.length; i < len; i++) {
+          this.starwarsService.getFilmByUrl(result.films[i])
+            .then(result => {
+              this.films.push(result);
+            })
+        }
+
+        for (var i = 0, len = result.characters.length; i < len; i++) {
+          this.starwarsService.getCharacterByUrl(result.characters[i])
+            .then(result => {
+              this.characters.push(result);
+            })
+        }
       })
+
+      
   }
   
   back() {
     //this.router.navigate(['/']);
     this.location.back();
   }
+
+  get comments():any{
+    return this.localStorageService.getLocalStorage(this.planetDetail.url) || [];
+  }
+
+  addComments(form:NgForm): void{
+    const comments=form.value.comments;
+    const url = this.planetDetail.url;
+    this.localStorageService.storeOnLocalStorage(url, comments);
+  }
+
 
 }
